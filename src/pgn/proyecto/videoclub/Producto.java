@@ -19,7 +19,7 @@ public abstract class Producto implements Serializable, Comparable<Producto>, Ca
 	private static final long serialVersionUID = 1L;
 	
 	private static final Pattern patternTitulo = Pattern
-			.compile("^[\\wáéíóúÁÉÍÓÚñÑ¿¡]{2,}" + "(\\s+[\\wáéíóúÁÉÍÓÚñÑ?!]{2,})*$");
+			.compile("^[A-ZÁÉÍÓÚÑ¿¡]{2,}" + "(\\s+[A-ZÁÉÍÓÚÑ?!]{2,})*$");
 	private Calendar fecha = Calendar.getInstance();
 	private String id;
 	private String titulo;
@@ -101,6 +101,15 @@ public abstract class Producto implements Serializable, Comparable<Producto>, Ca
 	@Override
 	public abstract float getPrecio(int dias, FactorPrecio factor);
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return getClass().getName() + "[id=" + id + ", titulo=" + titulo
+				+ ", annio=" + annio + "]";
+	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */

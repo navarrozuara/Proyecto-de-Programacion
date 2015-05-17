@@ -28,6 +28,8 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  * @author Elisa Navarro Zuara
@@ -53,6 +55,9 @@ public class Principal {
 	private Ordenar ordenar;
 	private Alquilar alquilar;
 	private Devolver devolver;
+	private MostrarPeliculas mostrarPeliculas;
+	private MostrarSeries mostrarSeries;
+	private MostrarMusica mostrarMusica;
 
 	/**
 	 * Launch the application.
@@ -285,19 +290,47 @@ public class Principal {
 		mnAyuda.setMnemonic('y');
 		menuBar.add(mnAyuda);
 		
+		JMenuItem mntmVerAyuda = new JMenuItem("Ver ayuda");
+		mntmVerAyuda.setMnemonic('V');
+		mntmVerAyuda.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, InputEvent.SHIFT_MASK));
+		mnAyuda.add(mntmVerAyuda);
+		
+		JMenuItem mntmAcercaDe = new JMenuItem("Acerca de...");
+		mntmAcercaDe.setMnemonic('A');
+		mntmAcercaDe.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
+		mnAyuda.add(mntmAcercaDe);
+		
 		JLabel lblPeliculas = new JLabel();
+		lblPeliculas.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				mostrarPeliculas();
+			}
+		});
 		lblPeliculas.setIcon(new ImageIcon(Principal.class.getResource("/imagenes/peliculas.png")));
-		lblPeliculas.setBounds(134, 35, 100, 75);
+		lblPeliculas.setBounds(30, 60, 100, 75);
 		frame.getContentPane().add(lblPeliculas);
 		
 		JLabel lblSeries = new JLabel();
+		lblSeries.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				mostrarSeries();
+			}
+		});
 		lblSeries.setIcon(new ImageIcon(Principal.class.getResource("/imagenes/series.png")));
-		lblSeries.setBounds(244, 35, 100, 75);
+		lblSeries.setBounds(175, 60, 100, 75);
 		frame.getContentPane().add(lblSeries);
 		
 		JLabel lblMusica = new JLabel();
+		lblMusica.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				mostrarMusica();
+			}
+		});
 		lblMusica.setIcon(new ImageIcon(Principal.class.getResource("/imagenes/musica.png")));
-		lblMusica.setBounds(205, 114, 100, 75);
+		lblMusica.setBounds(320, 60, 100, 75);
 		frame.getContentPane().add(lblMusica);
 		
 		JLabel lblImagen = new JLabel();
@@ -451,6 +484,57 @@ public class Principal {
 		}
 		ordenar = new Ordenar();
 		ordenar.setVisible(true);
+	}
+	
+	private void mostrarPeliculas() {
+		if (Gestion.getVideoclub().size() == 0) {
+			JOptionPane.showMessageDialog(frame.getContentPane(),
+					"No hay productos en el videoclub.", "Error",
+					JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		mostrarPeliculas = new MostrarPeliculas();
+		if (mostrarPeliculas.getVideoclub().size() == 0) {
+			JOptionPane.showMessageDialog(frame.getContentPane(),
+					"No hay peliculas en el videoclub.", "Error",
+					JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		mostrarPeliculas.setVisible(true);	
+	}
+	
+	private void mostrarSeries() {
+		if (Gestion.getVideoclub().size() == 0) {
+			JOptionPane.showMessageDialog(frame.getContentPane(),
+					"No hay productos en el videoclub.", "Error",
+					JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		mostrarSeries = new MostrarSeries();
+		if (mostrarSeries.getVideoclub().size() == 0) {
+			JOptionPane.showMessageDialog(frame.getContentPane(),
+					"No hay series en el videoclub.", "Error",
+					JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		mostrarSeries.setVisible(true);	
+	}
+	
+	private void mostrarMusica() {
+		if (Gestion.getVideoclub().size() == 0) {
+			JOptionPane.showMessageDialog(frame.getContentPane(),
+					"No hay productos en el videoclub.", "Error",
+					JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		mostrarMusica = new MostrarMusica();
+		if (mostrarMusica.getVideoclub().size() == 0) {
+			JOptionPane.showMessageDialog(frame.getContentPane(),
+					"No hay musica en el videoclub.", "Error",
+					JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		mostrarMusica.setVisible(true);	
 	}
 	
 }

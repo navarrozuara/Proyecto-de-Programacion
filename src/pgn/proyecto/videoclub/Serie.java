@@ -93,4 +93,13 @@ public class Serie extends Producto {
 		return 0;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return super.toString() + "[temporada=" + temporada + ", numTemporadas="
+				+ numTemporadas + ", genero=" + genero + "]";
+	}
+	
 }
