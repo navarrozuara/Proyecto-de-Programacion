@@ -19,7 +19,7 @@ public abstract class Producto implements Serializable, Comparable<Producto>, Ca
 	private static final long serialVersionUID = 1L;
 	
 	private static final Pattern patternTitulo = Pattern
-			.compile("^[A-Zаимсзя©║]{2,}" + "(\\s+[A-Zаимсзя?!]{2,})*$");
+			.compile("^[A-Zаимсзя\\d]{1,}" + "(\\s+[A-Zаимсзя\\d]{2,})*$");
 	private Calendar fecha = Calendar.getInstance();
 	private String id;
 	private String titulo;

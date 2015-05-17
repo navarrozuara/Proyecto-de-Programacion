@@ -55,6 +55,8 @@ public class Principal {
 	private Ordenar ordenar;
 	private Alquilar alquilar;
 	private Devolver devolver;
+	private Ayuda ayuda;
+	private AcercaDe acercaDe;
 	private MostrarPeliculas mostrarPeliculas;
 	private MostrarSeries mostrarSeries;
 	private MostrarMusica mostrarMusica;
@@ -291,11 +293,23 @@ public class Principal {
 		menuBar.add(mnAyuda);
 		
 		JMenuItem mntmVerAyuda = new JMenuItem("Ver ayuda");
+		mntmVerAyuda.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ayuda = new Ayuda();
+				ayuda.setVisible(true);
+			}
+		});
 		mntmVerAyuda.setMnemonic('V');
 		mntmVerAyuda.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, InputEvent.SHIFT_MASK));
 		mnAyuda.add(mntmVerAyuda);
 		
 		JMenuItem mntmAcercaDe = new JMenuItem("Acerca de...");
+		mntmAcercaDe.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				acercaDe = new AcercaDe();
+				acercaDe.setVisible(true);
+			}
+		});
 		mntmAcercaDe.setMnemonic('A');
 		mntmAcercaDe.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
 		mnAyuda.add(mntmAcercaDe);
