@@ -3,6 +3,7 @@
  */
 package pgn.proyecto.videoclub;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -12,8 +13,13 @@ import java.util.Date;
  * @author Elisa Navarro Zuara
  * @version 1.0
  */
-public class Alquiler {
+public class Alquiler implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private static Calendar fecha = Calendar.getInstance();
 	private static SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 	private Producto producto;
@@ -53,20 +59,20 @@ public class Alquiler {
 		producto.setDisponible(true);
 	}
 	
-	public static String mostrarRecibo(ArrayList<Alquiler> listaAlquileres, int dias, FactorPrecio factor) {
+	public static String mostrarRecibo(ArrayList<Alquiler> listaAlquileres, int dias, TipoAlquiler tipo) {
 		String recibo;
 		float total = 0f;
 		Gestion.setFechaDevolucion(dias);
-		recibo = "<H2>Recibo de alquiler:</H2>\n";
+		recibo = "\r\n\r\nRecibo de alquiler:";
 		for (Alquiler alquiler: listaAlquileres) {
-			recibo += "ID: " + alquiler.getProducto().getId() + "<br>Titulo: "
+			recibo += "\r\n\r\nID: " + alquiler.getProducto().getId() + "\r\nTitulo: "
 					+ alquiler.getProducto().getTitulo() + " ("
-					+ alquiler.getProducto().getPrecio(dias, factor) + " €)<br>";
-			recibo += "Fecha alquiler: " + alquiler.getFechaAlquiler() + "<br>";
-			recibo += "Fecha devolución: " + Gestion.getFechaDevolucion() + "<br><br>";
-			total += alquiler.getProducto().getPrecio(dias, factor);
+					+ alquiler.getProducto().getPrecio(dias, tipo) + " euros)\r\n";
+			recibo += "Fecha alquiler: " + alquiler.getFechaAlquiler();
+			recibo += "\r\nFecha devolución: " + Gestion.getFechaDevolucion();
+			total += alquiler.getProducto().getPrecio(dias, tipo);
 		}
-		recibo += "<P>IMPORTE TOTAL = " + "<B>" + total + " €</B>\n";
+		recibo += "\r\n\r\nIMPORTE TOTAL = " + total + " euros\r\n";
 		return recibo;
 	}
 

@@ -96,10 +96,10 @@ public abstract class Producto implements Serializable, Comparable<Producto>, Ca
 	}
 	
 	/* (non-Javadoc)
-	 * @see pgn.proyecto.videoclub.Calculable#getPrecio(int, pgn.proyecto.videoclub.FactorPrecio)
+	 * @see pgn.proyecto.videoclub.Calculable#getPrecio(int, pgn.proyecto.videoclub.TipoAlquiler)
 	 */
 	@Override
-	public abstract float getPrecio(int dias, FactorPrecio factor);
+	public abstract float getPrecio(int dias, TipoAlquiler tipo);
 	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()

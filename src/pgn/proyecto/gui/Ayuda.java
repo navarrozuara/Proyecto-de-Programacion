@@ -14,10 +14,10 @@ import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
-import java.awt.SystemColor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JTextPane;
+import java.awt.Color;
 
 /**
  * @author Elisa Navarro Zuara
@@ -41,7 +41,7 @@ public class Ayuda extends JDialog {
 		setBounds(100, 100, 592, 427);
 		
 		final JTextPane textPane = new JTextPane();
-		textPane.setBackground(SystemColor.inactiveCaptionText);
+		textPane.setBackground(new Color(220, 220, 220));
 		textPane.setEditable(false);
 		textPane.setBounds(246, 11, 330, 340);
 		textPane.setContentType("text/html");
@@ -174,13 +174,11 @@ public class Ayuda extends JDialog {
 		contentPanel.add(lblRegistrar);
 		contentPanel.add(lblDevolver);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBackground(SystemColor.inactiveCaptionText);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		
 		{
 			JPanel buttonPane = new JPanel();
-			buttonPane.setBackground(SystemColor.inactiveCaptionText);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{

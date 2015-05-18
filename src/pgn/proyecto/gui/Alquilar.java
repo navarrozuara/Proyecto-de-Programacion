@@ -97,7 +97,7 @@ public class Alquilar extends VideoclubGUI {
 					mostrarProducto(producto);
 					comprobarProducto();
 					textFieldAlquiler.setText(alquiler.getFechaAlquiler());
-					int n = JOptionPane.showOptionDialog(contentPanel,
+					int n = JOptionPane.showOptionDialog(null,
 							"¿Está seguro de que desea alquilarlo?",
 							"Confirmar", JOptionPane.YES_NO_CANCEL_OPTION,
 							JOptionPane.QUESTION_MESSAGE, null, null, null);
@@ -128,6 +128,12 @@ public class Alquilar extends VideoclubGUI {
 		
 		anterior.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				if (listaAlquileres.isEmpty()) {
+					JOptionPane.showMessageDialog(contentPanel,
+							"No se ha podido crear el recibo.", "Error",
+							JOptionPane.ERROR_MESSAGE);
+					return;
+				}
 				int dias = Integer.parseInt(textFieldDevolucion.getText().substring(0, 2))
 						- Integer.parseInt(textFieldAlquiler.getText().substring(0, 2));
 				Gestion.setFechaDevolucion(dias);
@@ -154,11 +160,11 @@ public class Alquilar extends VideoclubGUI {
 		return true;
 	}
 	
-	private FactorPrecio getPrecio() {
+	private TipoAlquiler getPrecio() {
 		if (rdbtnNormal.isSelected())
-			return FactorPrecio.NORMAL;
+			return TipoAlquiler.NORMAL;
 		else if (rdbtnEstreno.isSelected())
-			return FactorPrecio.ESTRENO;
+			return TipoAlquiler.ESTRENO;
 		else
 			return null;
 	}

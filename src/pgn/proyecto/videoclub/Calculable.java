@@ -14,11 +14,11 @@ public interface Calculable {
 	 * 
 	 * @param dias
 	 *            Representa el número de dias a alquilar
-	 * @param factor
-	 *            Representa el factor precio del producto
+	 * @param tipo
+	 *            Representa el tipo de alquiler del producto
 	 * 
 	 * @return Precio del producto
 	 */
-	float getPrecio(int dias, FactorPrecio factor);
+	float getPrecio(int dias, TipoAlquiler tipo);
 
 }

@@ -52,7 +52,7 @@ public class Devolver extends VideoclubGUI {
 					alquiler = new Alquiler(producto);
 					mostrarProducto(producto);
 					comprobarProducto();
-					int n = JOptionPane.showOptionDialog(contentPanel,
+					int n = JOptionPane.showOptionDialog(null,
 							"¿Está seguro de que desea devolverlo?",
 							"Confirmar", JOptionPane.YES_NO_CANCEL_OPTION,
 							JOptionPane.QUESTION_MESSAGE, null, null, null);

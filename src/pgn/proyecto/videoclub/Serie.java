@@ -77,17 +77,17 @@ public class Serie extends Producto {
 	}
 
 	@Override
-	public float getPrecio(int dias, FactorPrecio factor) {
+	public float getPrecio(int dias, TipoAlquiler tipo) {
 		float total;
-		if (factor == FactorPrecio.NORMAL) {
-			total = factor.getPrecio();
+		if (tipo == TipoAlquiler.NORMAL) {
+			total = tipo.getPrecio();
 			if (dias > 4)
-				total += factor.getPrecio() * 0.2 * (dias - 4);
+				total += tipo.getPrecio() * 0.2 * (dias - 4);
 			return total;
-		} else if (factor == FactorPrecio.ESTRENO) {
-			total = factor.getPrecio();
+		} else if (tipo == TipoAlquiler.ESTRENO) {
+			total = tipo.getPrecio();
 			if (dias > 4)
-				total += factor.getPrecio() * 0.2 * (dias - 4);
+				total += tipo.getPrecio() * 0.2 * (dias - 4);
 			return total;
 		}
 		return 0;

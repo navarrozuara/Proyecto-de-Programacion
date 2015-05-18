@@ -50,7 +50,7 @@ public class Eliminar extends VideoclubGUI {
 					producto = Gestion.getVideoclub().get(textFieldID.getText());
 					mostrarProducto(producto);
 					comprobarProducto();
-					int n = JOptionPane.showOptionDialog(contentPanel,
+					int n = JOptionPane.showOptionDialog(null,
 							"¿Está seguro de que desea eliminarlo?",
 							"Confirmar", JOptionPane.YES_NO_CANCEL_OPTION,
 							JOptionPane.QUESTION_MESSAGE, null, null, null);
