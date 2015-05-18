@@ -23,8 +23,8 @@ public class Videoclub implements Serializable {
 	public boolean annadir(String id, String titulo, int annio, String autor,
 			Genero genero) throws ProductoYaExisteException,
 			IdNoValidoException, TituloNoValidoException,
-			AnnioNoValidoException, GeneroNoValidoException,
-			TipoNoValidoException {
+			AnnioNoValidoException, AutorNoValidoException,
+			GeneroNoValidoException, TipoNoValidoException {
 		Producto producto = new Pelicula(id, titulo, annio, autor, genero);
 		if (listaProductos.contains(producto))
 			throw new ProductoYaExisteException("El producto ya existe.");
@@ -46,8 +46,8 @@ public class Videoclub implements Serializable {
 	public boolean annadir(String id, String titulo, int annio, String autor,
 			GeneroMusical generoMusical) throws ProductoYaExisteException,
 			IdNoValidoException, TituloNoValidoException,
-			AnnioNoValidoException, GeneroNoValidoException,
-			TipoNoValidoException {
+			AnnioNoValidoException, AutorNoValidoException,
+			GeneroNoValidoException, TipoNoValidoException {
 		Producto producto = new Musica(id, titulo, annio, autor, generoMusical);
 		if (listaProductos.contains(producto))
 			throw new ProductoYaExisteException("El producto ya existe.");

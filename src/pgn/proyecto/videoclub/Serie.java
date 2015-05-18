@@ -33,7 +33,7 @@ public class Serie extends Producto {
 		setTipo(TipoItem.SERIE);
 	}
 	
-	public static boolean esValidoID(String id) {
+	private boolean esValidoID(String id) {
 		return patternID.matcher(id).matches();
 	}
 	

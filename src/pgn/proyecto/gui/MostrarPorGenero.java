@@ -154,8 +154,8 @@ public class MostrarPorGenero extends VideoclubGUI {
 				}
 			} catch (ProductoYaExisteException | IdNoValidoException
 					| TituloNoValidoException | AnnioNoValidoException
-					| TemporadaNoValidaException | GeneroNoValidoException
-					| TipoNoValidoException e) {
+					| AutorNoValidoException | TemporadaNoValidaException
+					| GeneroNoValidoException | TipoNoValidoException e) {
 				JOptionPane.showMessageDialog(contentPanel, e.getMessage(),
 						"Error", JOptionPane.ERROR_MESSAGE);
 			}

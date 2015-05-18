@@ -17,21 +17,28 @@ public class Musica extends Producto {
 	private static final long serialVersionUID = 1L;
 	
 	private static final Pattern patternID = Pattern.compile("^\\d{4}(MUS)$");
+	private static final Pattern patternInterprete = Pattern
+			.compile("^[A-Z¡…Õ”⁄—]{2,}" + "(\\s+[A-Z¡…Õ”⁄—]{2,})*$");
 	private String interprete;
 	private GeneroMusical genero;
 	
 	Musica(String id, String titulo, int annio, String interprete,
 			GeneroMusical genero) throws IdNoValidoException,
 			TituloNoValidoException, AnnioNoValidoException,
-			GeneroNoValidoException, TipoNoValidoException {
+			AutorNoValidoException, GeneroNoValidoException,
+			TipoNoValidoException {
 		super(id, titulo, annio);
 		setInterprete(interprete);
 		setGenero(genero);
 		setTipo(TipoItem.MUSICA);
 	}
 	
-	public static boolean esValidoID(String id) {
+	private boolean esValidoID(String id) {
 		return patternID.matcher(id).matches();
+	}
+	
+	private boolean esValidoInterprete(String interprete) {
+		return patternInterprete.matcher(interprete).matches();
 	}
 	
 	@Override
@@ -41,7 +48,9 @@ public class Musica extends Producto {
 		super.setId(id);
 	}
 
-	private void setInterprete(String interprete) {
+	private void setInterprete(String interprete) throws AutorNoValidoException {
+		if (!esValidoInterprete(interprete))
+			throw new AutorNoValidoException("El interprete no es v·lido.");
 		this.interprete = interprete;
 	}
 	

@@ -73,7 +73,8 @@ public class MostrarMusica extends VideoclubGUI {
 							((Musica) Gestion.getVideoclub().get(i)).getGenero());
 				} catch (ProductoYaExisteException | IdNoValidoException
 						| TituloNoValidoException | AnnioNoValidoException
-						| GeneroNoValidoException | TipoNoValidoException e) {
+						| AutorNoValidoException | GeneroNoValidoException
+						| TipoNoValidoException e) {
 				}
 		}
 		return videoclubMusica;

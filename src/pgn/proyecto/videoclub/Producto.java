@@ -37,7 +37,7 @@ public abstract class Producto implements Serializable, Comparable<Producto>, Ca
 		setNumAlquiler(0);
 	}
 	
-	private static boolean esValidoTitulo(String titulo) {
+	private boolean esValidoTitulo(String titulo) {
 		return patternTitulo.matcher(titulo).matches();
 	}
 
@@ -130,7 +130,6 @@ public abstract class Producto implements Serializable, Comparable<Producto>, Ca
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
 		return result;
 	}
 
@@ -150,11 +149,6 @@ public abstract class Producto implements Serializable, Comparable<Producto>, Ca
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
-			return false;
-		if (titulo == null) {
-			if (other.titulo != null)
-				return false;
-		} else if (!titulo.equals(other.titulo))
 			return false;
 		return true;
 	}

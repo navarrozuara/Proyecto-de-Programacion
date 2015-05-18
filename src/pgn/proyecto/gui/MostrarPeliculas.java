@@ -73,7 +73,8 @@ public class MostrarPeliculas extends VideoclubGUI {
 							((Pelicula) Gestion.getVideoclub().get(i)).getGenero());
 				} catch (ProductoYaExisteException | IdNoValidoException
 						| TituloNoValidoException | AnnioNoValidoException
-						| GeneroNoValidoException | TipoNoValidoException e) {
+						| AutorNoValidoException | GeneroNoValidoException
+						| TipoNoValidoException e) {
 				}
 		}
 		return videoclubPeliculas;

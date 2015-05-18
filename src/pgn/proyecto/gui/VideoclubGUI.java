@@ -66,7 +66,7 @@ public class VideoclubGUI extends JDialog implements ChangeListener {
 	protected JRadioButton rdbtnEstreno;
 	protected JComboBox<Genero> comboBoxGenero;
 	protected JComboBox<GeneroMusical> comboBoxGeneroMusical;
-	protected JButton buttonDisponible;
+	protected JButton disponible;
 	protected JButton enviar;
 	protected JButton salir;
 	protected JButton anterior;
@@ -159,8 +159,8 @@ public class VideoclubGUI extends JDialog implements ChangeListener {
 		comboBoxGeneroMusical.setVisible(false);
 		comboBoxGeneroMusical.setBounds(190, 128, 154, 20);
 		
-		buttonDisponible = new JButton("Disponible");
-		buttonDisponible.setBounds(232, 24, 112, 23);
+		disponible = new JButton("Disponible");
+		disponible.setBounds(232, 24, 112, 23);
 		
 		panel1 = new JPanel();
 		panel1.setVisible(false);
@@ -196,7 +196,7 @@ public class VideoclubGUI extends JDialog implements ChangeListener {
 		contentPanel.add(comboBoxGeneroMusical);
 		contentPanel.add(panel);
 		contentPanel.add(panel1);
-		contentPanel.add(buttonDisponible);
+		contentPanel.add(disponible);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -234,9 +234,9 @@ public class VideoclubGUI extends JDialog implements ChangeListener {
 	protected void comprobarProducto() {
 		try {
 			if (!Gestion.getVideoclub().get(textFieldID.getText()).isDisponible())
-				buttonDisponible.setEnabled(false);
+				disponible.setEnabled(false);
 			else
-				buttonDisponible.setEnabled(true);
+				disponible.setEnabled(true);
 		} catch (ProductoNoExisteException e) {
 			JOptionPane.showMessageDialog(contentPanel, e.getMessage(),
 					"Error", JOptionPane.ERROR_MESSAGE);

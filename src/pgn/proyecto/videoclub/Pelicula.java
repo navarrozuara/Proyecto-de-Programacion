@@ -17,21 +17,27 @@ public class Pelicula extends Producto {
 	private static final long serialVersionUID = 1L;
 	
 	private static final Pattern patternID = Pattern.compile("^\\d{4}(PEL)$");
+	private static final Pattern patternDirector = Pattern
+			.compile("^[A-Z¡…Õ”⁄—]{2,}" + "(\\s+[A-Z¡…Õ”⁄—]{2,})*$");
 	private String director;
 	private Genero genero;
 	
 	Pelicula(String id, String titulo, int annio, String director, Genero genero)
 			throws IdNoValidoException, TituloNoValidoException,
-			AnnioNoValidoException, GeneroNoValidoException,
-			TipoNoValidoException {
+			AnnioNoValidoException, AutorNoValidoException,
+			GeneroNoValidoException, TipoNoValidoException {
 		super(id, titulo, annio);
 		setDirector(director);
 		setGenero(genero);
 		setTipo(TipoItem.PELICULA);
 	}
 	
-	private static boolean esValidoID(String id) {
+	private boolean esValidoID(String id) {
 		return patternID.matcher(id).matches();
+	}
+	
+	private boolean esValidoDirector(String director) {
+		return patternDirector.matcher(director).matches();
 	}
 	
 	@Override
@@ -41,7 +47,9 @@ public class Pelicula extends Producto {
 		super.setId(id);
 	}
 	
-	private void setDirector(String director) {
+	private void setDirector(String director) throws AutorNoValidoException {
+		if (!esValidoDirector(director))
+			throw new AutorNoValidoException("El director no es v·lido.");
 		this.director = director;
 	}
 	

@@ -67,8 +67,9 @@ public class Annadir extends VideoclubGUI {
 					}
 				} catch (NumberFormatException | ProductoYaExisteException
 						| IdNoValidoException | TituloNoValidoException
-						| AnnioNoValidoException | TemporadaNoValidaException
-						| GeneroNoValidoException | TipoNoValidoException e) {
+						| AnnioNoValidoException | AutorNoValidoException
+						| TemporadaNoValidaException | GeneroNoValidoException
+						| TipoNoValidoException e) {
 					JOptionPane.showMessageDialog(contentPanel,
 							e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 				}
