@@ -98,13 +98,13 @@ public class VideoclubGUI extends JDialog implements ChangeListener {
 		panel.add(rdbtnPelicula);
 		buttonGroup.add(rdbtnPelicula);
 		
-		rdbtnSerie = new JRadioButton("Serie");
+		rdbtnSerie = new JRadioButton("Serie", false);
 		rdbtnSerie.addChangeListener(this);
 		rdbtnSerie.setBounds(8, 42, 71, 23);
 		panel.add(rdbtnSerie);
 		buttonGroup.add(rdbtnSerie);
 		
-		rdbtnMusica = new JRadioButton("M\u00FAsica");
+		rdbtnMusica = new JRadioButton("M\u00FAsica", false);
 		rdbtnMusica.addChangeListener(this);
 		rdbtnMusica.setBounds(8, 68, 71, 23);
 		panel.add(rdbtnMusica);
@@ -231,7 +231,10 @@ public class VideoclubGUI extends JDialog implements ChangeListener {
 		}
 	}
 
-	protected void comprobarProducto() {
+	/**
+	 * Comprueba si un producto está o no disponible en el videoclub
+	 */
+	protected void isDisponible() {
 		try {
 			if (!Gestion.getVideoclub().get(textFieldID.getText()).isDisponible())
 				disponible.setEnabled(false);
@@ -246,24 +249,24 @@ public class VideoclubGUI extends JDialog implements ChangeListener {
 	@Override
 	public void stateChanged(ChangeEvent e) { 
 		 if (rdbtnPelicula.isSelected()) {
-			 configurarElemento(true);
+			 mostrarAutor(true);
 			 lblAutor.setText("Director");
-			 configurarElementos(false);
+			 mostrarTemporada(false);
 			 comboBoxGenero.setVisible(true);
 			 comboBoxGeneroMusical.setVisible(false);
 			 comboBoxGenero.setModel(new DefaultComboBoxModel<Genero>(Genero.values()));
 		 }
 		 if (rdbtnSerie.isSelected()) {
-			 configurarElemento(false);
-			 configurarElementos(true);
+			 mostrarAutor(false);
+			 mostrarTemporada(true);
 			 comboBoxGenero.setVisible(true);
 			 comboBoxGeneroMusical.setVisible(false);
 			 comboBoxGenero.setModel(new DefaultComboBoxModel<Genero>(Genero.values()));
 		 }
 		 if (rdbtnMusica.isSelected()) {
-			 configurarElemento(true);
+			 mostrarAutor(true);
 			 lblAutor.setText("Intérprete");
-			 configurarElementos(false);
+			 mostrarTemporada(false);
 			 comboBoxGenero.setVisible(false);
 			 comboBoxGeneroMusical.setVisible(true);
 			 comboBoxGeneroMusical.setModel(new DefaultComboBoxModel<GeneroMusical>(
@@ -271,12 +274,24 @@ public class VideoclubGUI extends JDialog implements ChangeListener {
 		}
 	 }
 	
-	private void configurarElemento(boolean b) {
+	/**
+	 * Muestra o no todos los elementos relacionados con el autor
+	 * 
+	 * @param b
+	 *            Representa el estado de los elementos
+	 */
+	private void mostrarAutor(boolean b) {
 		lblAutor.setVisible(b);
 		textFieldAutor.setVisible(b);
 	}
 
-	private void configurarElementos(boolean b) {
+	/**
+	 * Muestra o no todos los elementos relacionados con las temporadas
+	 * 
+	 * @param b
+	 *            Representa el estado de los elementos
+	 */
+	private void mostrarTemporada(boolean b) {
 		lblTemporada.setVisible(b);
 		lblNumTemporadas.setVisible(b);
 		textFieldTemporada.setVisible(b);

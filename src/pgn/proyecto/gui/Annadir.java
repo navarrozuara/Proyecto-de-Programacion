@@ -77,6 +77,11 @@ public class Annadir extends VideoclubGUI {
 		});
 	}
 	
+	/**
+	 * Devuelve el tipo de producto seleccionado
+	 * 
+	 * @return Tipo de producto seleccionado
+	 */
 	private TipoItem getTipo() {
 		if (rdbtnPelicula.isSelected())
 			return TipoItem.PELICULA;

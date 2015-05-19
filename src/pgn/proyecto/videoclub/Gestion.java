@@ -4,11 +4,10 @@
 package pgn.proyecto.videoclub;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 
 /**
+ * Clase que gestiona el videoclub
+ * 
  * @author Elisa Navarro Zuara
  * @version 1.0
  */
@@ -28,21 +27,6 @@ public class Gestion {
 	 * Estado del videoclub
 	 */
 	private static boolean modificado;
-	
-	/**
-	 * Formato de fecha (dd/MM/yyyy)
-	 */
-	private static SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-	
-	/**
-	 * Fecha actual
-	 */
-	private static Calendar fecha = Calendar.getInstance();
-	
-	/**
-	 * Fecha de devolución
-	 */
-	private static Date fechaDevolucion;
 	
 	/**
 	 * Devuelve el videoclub
@@ -99,27 +83,6 @@ public class Gestion {
 	 */
 	public static void setModificado(boolean modificado) {
 		Gestion.modificado = modificado;
-	}
-	
-	/**
-	 * Devuelve la fecha de devolución
-	 * 
-	 * @return Fecha de devolución
-	 */
-	public static String getFechaDevolucion() {
-		return formato.format(fechaDevolucion);
-	}
-	
-	/**
-	 * Modifica la fecha de devolución
-	 * 
-	 * @param dias
-	 *            Representa el número de dias a alquilar
-	 */
-	public static void setFechaDevolucion(int dias) {
-		fecha.add(Calendar.DAY_OF_MONTH, dias);
-		fechaDevolucion = fecha.getTime();
-		fecha.setTime(new Date());
 	}
 
 }

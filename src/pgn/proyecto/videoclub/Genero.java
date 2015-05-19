@@ -4,6 +4,9 @@
 package pgn.proyecto.videoclub;
 
 /**
+ * Se limitarán los géneros a diez: acción, animación, aventura, comedia, drama,
+ * española, sci-fi, terror, thriller y western.
+ * 
  * @author Elisa Navarro Zuara
  * @version 1.0
  */

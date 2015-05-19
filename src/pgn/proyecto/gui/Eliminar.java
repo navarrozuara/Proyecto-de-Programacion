@@ -49,7 +49,7 @@ public class Eliminar extends VideoclubGUI {
 				try {
 					producto = Gestion.getVideoclub().get(textFieldID.getText());
 					mostrarProducto(producto);
-					comprobarProducto();
+					isDisponible();
 					int n = JOptionPane.showOptionDialog(null,
 							"¿Está seguro de que desea eliminarlo?",
 							"Confirmar", JOptionPane.YES_NO_CANCEL_OPTION,
@@ -73,6 +73,9 @@ public class Eliminar extends VideoclubGUI {
 		});
 	}
 
+	/**
+	 * Limpia el contenido del diálogo
+	 */
 	private void clear() {
 		textFieldID.setText("");
 		textFieldTitulo.setText("");
@@ -85,6 +88,12 @@ public class Eliminar extends VideoclubGUI {
 		comboBoxGeneroMusical.setSelectedItem(null);
 	}
 
+	/**
+	 * Muestra las características de un producto
+	 * 
+	 * @param producto
+	 *            Representa el producto a mostrar
+	 */
 	private void mostrarProducto(Producto producto) {
 		if (producto instanceof Pelicula) {
 			Pelicula pelicula = (Pelicula) producto;

@@ -26,6 +26,9 @@ public class Alquilar extends VideoclubGUI {
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * Colección de alquileres
+	 */
 	private static ArrayList<Alquiler> listaAlquileres = new ArrayList<Alquiler>();
 	private JTextField textFieldAlquiler;
 	private JTextField textFieldDevolucion;
@@ -95,7 +98,7 @@ public class Alquilar extends VideoclubGUI {
 					producto = Gestion.getVideoclub().get(textFieldID.getText());
 					alquiler = new Alquiler(producto);
 					mostrarProducto(producto);
-					comprobarProducto();
+					isDisponible();
 					textFieldAlquiler.setText(alquiler.getFechaAlquiler());
 					int n = JOptionPane.showOptionDialog(null,
 							"¿Está seguro de que desea alquilarlo?",
@@ -106,7 +109,7 @@ public class Alquilar extends VideoclubGUI {
 						try {
 							alquiler.alquilar();
 							listaAlquileres.add(alquiler);
-							comprobarProducto();
+							isDisponible();
 							Gestion.setModificado(true);
 							clear();
 							break;
@@ -136,8 +139,8 @@ public class Alquilar extends VideoclubGUI {
 				}
 				int dias = Integer.parseInt(textFieldDevolucion.getText().substring(0, 2))
 						- Integer.parseInt(textFieldAlquiler.getText().substring(0, 2));
-				Gestion.setFechaDevolucion(dias);
-				Recibo recibo = new Recibo(Alquiler.mostrarRecibo(listaAlquileres, dias, getPrecio()));
+				Alquiler.setFechaDevolucion(dias);
+				Recibo recibo = new Recibo(Alquiler.generarRecibo(listaAlquileres, dias, getPrecio()));
 				recibo.setVisible(true);
 			}
 		});
@@ -149,6 +152,13 @@ public class Alquilar extends VideoclubGUI {
 		});
 	}
 
+	/**
+	 * Comprueba si la fecha introducida es válida o no
+	 * 
+	 * @param fecha
+	 *            Representa la fecha a validar
+	 * @return true si la fecha es válida, false si la fecha no es válida
+	 */
 	private boolean esValidaFecha(String fecha) {
 		try {
 			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
@@ -160,6 +170,11 @@ public class Alquilar extends VideoclubGUI {
 		return true;
 	}
 	
+	/**
+	 * Devuelve el precio del tipo de alquiler seleccionado
+	 * 
+	 * @return Precio del tipo de alquiler seleccionado
+	 */
 	private TipoAlquiler getPrecio() {
 		if (rdbtnNormal.isSelected())
 			return TipoAlquiler.NORMAL;
@@ -169,6 +184,9 @@ public class Alquilar extends VideoclubGUI {
 			return null;
 	}
 
+	/**
+	 * Limpia el contenido del diálogo
+	 */
 	private void clear() {
 		textFieldID.setText("");
 		textFieldTitulo.setText("");
@@ -181,6 +199,12 @@ public class Alquilar extends VideoclubGUI {
 		comboBoxGeneroMusical.setSelectedItem(null);
 	}
 	
+	/**
+	 * Muestra las características de un producto
+	 * 
+	 * @param producto
+	 *            Representa el producto a mostrar
+	 */
 	private void mostrarProducto(Producto producto) {
 		if (producto instanceof Pelicula) {
 			Pelicula pelicula = (Pelicula) producto;

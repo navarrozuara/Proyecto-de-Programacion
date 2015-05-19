@@ -100,6 +100,13 @@ public class Recibo extends JDialog {
 		}
 	}
 	
+	/**
+	 * Método para guardar un recibo
+	 * 
+	 * @param file
+	 *            Representa el fichero a guardar
+	 * @throws IOException
+	 */
 	private void guardar(File file) throws IOException {
 		try (DataOutputStream out = new DataOutputStream(
 				new BufferedOutputStream(new FileOutputStream(file, true)))) {

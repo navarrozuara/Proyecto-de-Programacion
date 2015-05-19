@@ -4,6 +4,8 @@
 package pgn.proyecto.videoclub;
 
 /**
+ * Representa cada uno de los tipos de productos del videoclub
+ * 
  * @author Elisa Navarro Zuara
  * @version 1.0
  */

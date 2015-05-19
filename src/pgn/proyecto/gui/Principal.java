@@ -32,6 +32,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 /**
+ * Ventana principal del programa
+ * 
  * @author Elisa Navarro Zuara
  * @version 1.0
  */
@@ -44,21 +46,79 @@ public class Principal {
 	private JMenu mnAlquiler;
 	private JMenu mnAyuda;
 	
+	/**
+	 * JFileChooser
+	 */
 	private JFileChooser fileChooser = new JFileChooser();
+	
+	/**
+	 * Filtro aplicado al JFileChooser
+	 */
 	private FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.obj", "obj");
 	
+	/**
+	 * Ventana para añadir productos
+	 */
 	private Annadir annadir;
+	
+	/**
+	 * Ventana para eliminar productos
+	 */
 	private Eliminar eliminar;
+	
+	/**
+	 * Ventana para mostrar los productos
+	 */
 	private Mostrar mostrar;
+	
+	/**
+	 * Ventana para mostrar los productos por género
+	 */
 	private ElegirGenero elegirGenero;
+	
+	/**
+	 * Ventana para mostrar los productos por título
+	 */
 	private MostrarPorTitulo mostrarPorTitulo;
+	
+	/**
+	 * Ventana para ordenar los productos
+	 */
 	private Ordenar ordenar;
+	
+	/**
+	 * Ventana para alquilar productos
+	 */
 	private Alquilar alquilar;
+	
+	/**
+	 * Ventana para devolver productos
+	 */
 	private Devolver devolver;
+	
+	/**
+	 * Ventana de ayuda
+	 */
 	private Ayuda ayuda;
+	
+	/**
+	 * Ventana acerca de
+	 */
 	private AcercaDe acercaDe;
+	
+	/**
+	 * Ventana para mostrar las películas
+	 */
 	private MostrarPeliculas mostrarPeliculas;
+	
+	/**
+	 * Ventana para mostrar las series
+	 */
 	private MostrarSeries mostrarSeries;
+	
+	/**
+	 * Ventana para mostrar la música
+	 */
 	private MostrarMusica mostrarMusica;
 
 	/**
@@ -354,6 +414,10 @@ public class Principal {
 		frame.getContentPane().setLayout(null);
 	}
 
+	/**
+	 * Crea un nuevo videoclub, en caso de que el videoclub se haya modificado
+	 * se pregunta al usuario si desea guardarlo
+	 */
 	private void nuevo() {
 		if (Gestion.isModificado()) {
 			int n = JOptionPane.showOptionDialog(frame.getContentPane(),
@@ -376,6 +440,10 @@ public class Principal {
 		frame.setTitle(Gestion.getFile().getName());
 	}
 	
+	/**
+	 * Recupera el contenido de un fichero, en caso de que el videoclub se haya
+	 * modificado se pregunta al usuario si desea guardarlo
+	 */
 	private void abrir() {
 		if (Gestion.isModificado()) {
 			int n = JOptionPane.showOptionDialog(frame.getContentPane(),
@@ -411,6 +479,10 @@ public class Principal {
 		}
 	}
 	
+	/**
+	 * Guarda el contenido en un fichero, si no hay un fichero previo se
+	 * solicita el nombre del mismo
+	 */
 	private void guardar() {
 		if (Gestion.getFile() == null || Gestion.getFile().getName().equals("Sin título"))
 			guardarComo();
@@ -429,6 +501,11 @@ public class Principal {
 		}
 	}
 	
+	/**
+	 * Guarda el contenido en un fichero solicitando el nombre del mismo, en
+	 * caso de existir el fichero se pregunta al usuario si desea
+	 * sobreescribirlo
+	 */
 	private void guardarComo() {
 		int seleccion = fileChooser.showSaveDialog(frame);
 		if (seleccion == JFileChooser.APPROVE_OPTION) {
@@ -456,6 +533,9 @@ public class Principal {
 		}
 	}
 
+	/**
+	 * Muestra los productos del videoclub
+	 */
 	private void mostrar() {
 		if (Gestion.getVideoclub().size() == 0) {
 			JOptionPane.showMessageDialog(frame.getContentPane(),
@@ -467,6 +547,9 @@ public class Principal {
 		mostrar.setVisible(true);
 	}
 	
+	/**
+	 * Muestra por género los productos del videoclub
+	 */
 	private void mostrarPorGenero() {
 		if (Gestion.getVideoclub().size() == 0) {
 			JOptionPane.showMessageDialog(frame.getContentPane(),
@@ -478,6 +561,9 @@ public class Principal {
 		elegirGenero.setVisible(true);
 	}
 	
+	/**
+	 * Muestra por título los productos del videoclub
+	 */
 	private void mostrarPorTitulo() {
 		if (Gestion.getVideoclub().size() == 0) {
 			JOptionPane.showMessageDialog(frame.getContentPane(),
@@ -489,6 +575,9 @@ public class Principal {
 		mostrarPorTitulo.setVisible(true);	
 	}
 	
+	/**
+	 * Ordena los productos del videoclub
+	 */
 	private void ordenar() {
 		if (Gestion.getVideoclub().size() == 0) {
 			JOptionPane.showMessageDialog(frame.getContentPane(),
@@ -500,6 +589,9 @@ public class Principal {
 		ordenar.setVisible(true);
 	}
 	
+	/**
+	 * Muestra las películas del videoclub
+	 */
 	private void mostrarPeliculas() {
 		if (Gestion.getVideoclub().size() == 0) {
 			JOptionPane.showMessageDialog(frame.getContentPane(),
@@ -517,6 +609,9 @@ public class Principal {
 		mostrarPeliculas.setVisible(true);	
 	}
 	
+	/**
+	 * Muestra las series del videoclub
+	 */
 	private void mostrarSeries() {
 		if (Gestion.getVideoclub().size() == 0) {
 			JOptionPane.showMessageDialog(frame.getContentPane(),
@@ -534,6 +629,9 @@ public class Principal {
 		mostrarSeries.setVisible(true);	
 	}
 	
+	/**
+	 * Muestra la música del videoclub
+	 */
 	private void mostrarMusica() {
 		if (Gestion.getVideoclub().size() == 0) {
 			JOptionPane.showMessageDialog(frame.getContentPane(),

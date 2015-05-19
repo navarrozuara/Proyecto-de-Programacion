@@ -8,6 +8,21 @@ import java.util.Calendar;
 import java.util.regex.Pattern;
 
 /**
+ * Un producto tendrá las siguientes características:
+ * <ul>
+ * <li>Identificador (único por producto). El identificador constará de cuatro
+ * dígitos y un grupo de tres caracteres.
+ * <ul>
+ * <li>PEL, si el producto es una película.</li>
+ * <li>SER, si el producto es una serie.</li>
+ * <li>MUS, si el producto es una música.</li>
+ * </ul>
+ * </li>
+ * <li>Título. El título debe estar en mayúscula y debe de tener, al menos, tres
+ * caracteres.</li>
+ * <li>Año. Un año válido comprendido entre 1900 y el año actual.</li>
+ * </ul>
+ * 
  * @author Elisa Navarro Zuara
  * @version 1.0
  */
@@ -18,97 +33,199 @@ public abstract class Producto implements Serializable, Comparable<Producto>, Ca
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * Patrón para un título válido
+	 */
 	private static final Pattern patternTitulo = Pattern
 			.compile("^[A-ZÁÉÍÓÚÑ\\d]{1,}" + "(\\s+[A-ZÁÉÍÓÚÑ\\d]{2,})*$");
+	
+	/**
+	 * Fecha actual
+	 */
 	private Calendar fecha = Calendar.getInstance();
+	
+	/**
+	 * Identificador del producto
+	 */
 	private String id;
+	
+	/**
+	 * Título del producto
+	 */
 	private String titulo;
+	
+	/**
+	 * Año de estreno del producto
+	 */
 	private int annio;
+	
+	/**
+	 * Tipo de producto
+	 */
 	private TipoItem tipo;
+	
+	/**
+	 * Estado del producto
+	 */
 	private boolean disponible;
-	private int numAlquiler;
 
+	/**
+	 * Construye un nuevo producto de identificador, título y año especificado
+	 * 
+	 * @param id
+	 *            Representa el identificador del nuevo producto
+	 * @param titulo
+	 *            Representa el título del nuevo producto
+	 * @param annio
+	 *            Representa el año de estreno del nuevo producto
+	 * 
+	 * @throws IdNoValidoException
+	 *             Si el identificador no es válido
+	 * @throws TituloNoValidoException
+	 *             Si el título no es válido
+	 * @throws AnnioNoValidoException
+	 *             Si el año de estreno no es válido
+	 */
 	Producto(String id, String titulo, int annio) throws IdNoValidoException,
 			TituloNoValidoException, AnnioNoValidoException {
+		super();
 		setId(id);
 		setTitulo(titulo);
 		setAnnio(annio);
 		setDisponible(true);
-		setNumAlquiler(0);
 	}
 	
+	/**
+	 * Comprueba si el título del producto es válido o no
+	 * 
+	 * @param titulo
+	 *            Representa el título a validar
+	 * @return true si el título es válido, false si el título no es válido
+	 */
 	private boolean esValidoTitulo(String titulo) {
 		return patternTitulo.matcher(titulo).matches();
 	}
 
+	/**
+	 * Modifica el identificador del producto
+	 * 
+	 * @param id
+	 *            Representa el nuevo identificador del producto
+	 * @throws IdNoValidoException
+	 *             Si el identificador no es válido
+	 */
 	protected void setId(String id) throws IdNoValidoException {
 		this.id = id;
 	}
 
+	/**
+	 * Modifica el título del producto
+	 * 
+	 * @param titulo
+	 *            Representa el nuevo título del producto
+	 * @throws TituloNoValidoException
+	 *             Si el título no es válido
+	 */
 	private void setTitulo(String titulo) throws TituloNoValidoException {
 		if (!esValidoTitulo(titulo))
 			throw new TituloNoValidoException("El título no es válido.");
 		this.titulo = titulo;
 	}
 	
+	/**
+	 * Modifica el año de estreno del producto
+	 * 
+	 * @param annio
+	 *            Representa el nuevo año de estreno del producto
+	 * @throws AnnioNoValidoException
+	 *             Si el año de estreno no es válido
+	 */
 	private void setAnnio(int annio) throws AnnioNoValidoException {
 		if (annio < 1900 || annio > fecha.get(Calendar.YEAR))
 			throw new AnnioNoValidoException("El año no es válido.");
 		this.annio = annio;
 	}
 	
+	/**
+	 * Modifica el tipo de producto
+	 * 
+	 * @param tipo
+	 *            Representa el nuevo tipo de producto
+	 * @throws TipoNoValidoException
+	 *             Si el tipo de producto no es válido
+	 */
 	protected void setTipo(TipoItem tipo) throws TipoNoValidoException {
 		if (tipo == null)
 			throw new TipoNoValidoException("El tipo no es válido.");
 		this.tipo = tipo;
 	}
 
+	/**
+	 * Devuelve el identificador del producto
+	 * 
+	 * @return Identificador del producto
+	 */
 	public String getId() {
 		return id;
 	}
 
+	/**
+	 * Devuelve el título del producto
+	 * 
+	 * @return Título del producto
+	 */
 	public String getTitulo() {
 		return titulo;
 	}
 	
+	/**
+	 * Devuelve el año de estreno del producto
+	 * 
+	 * @return Año de estreno del producto
+	 */
 	public int getAnnio() {
 		return annio;
 	}
 	
+	/**
+	 * Devuelve el tipo de producto
+	 * 
+	 * @return Tipo de producto
+	 */
 	public TipoItem getTipo() {
 		return tipo;
 	}
 
+	/**
+	 * Devuelve el estado del producto
+	 * 
+	 * @return Estado del producto
+	 */
 	public boolean isDisponible() {
 		return disponible;
 	}
 
+	/**
+	 * Modifica el estado del producto
+	 * 
+	 * @param disponible
+	 *            Representa el nuevo estado del producto
+	 */
 	void setDisponible(boolean disponible) {
 		this.disponible = disponible;
 	}
-
-	int getNumAlquiler() {
-		return numAlquiler;
-	}
-
-	void setNumAlquiler(int numAlquiler) {
-		this.numAlquiler = numAlquiler;
-	}
 	
-	/* (non-Javadoc)
-	 * @see pgn.proyecto.videoclub.Calculable#getPrecio(int, pgn.proyecto.videoclub.TipoAlquiler)
+	/**
+	 * Calcula el precio del producto
+	 * 
+	 * @param dias
+	 *            Representa el número de dias a alquilar
+	 * @param tipo
+	 *            Representa el tipo de alquiler
+	 * @return Precio del producto
 	 */
 	@Override
 	public abstract float getPrecio(int dias, TipoAlquiler tipo);
-	
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return getClass().getName() + "[id=" + id + ", titulo=" + titulo
-				+ ", annio=" + annio + "]";
-	}
 
 	/* (non-Javadoc)
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)

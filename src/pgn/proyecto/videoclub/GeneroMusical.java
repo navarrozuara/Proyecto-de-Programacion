@@ -4,6 +4,9 @@
 package pgn.proyecto.videoclub;
 
 /**
+ * Se limitarán los géneros musicales a nueve: pop nacional, pop internacional,
+ * flamenco, rock, heavy metal, rap, reggaeton, salsa y techno.
+ * 
  * @author Elisa Navarro Zuara
  * @version 1.0
  */

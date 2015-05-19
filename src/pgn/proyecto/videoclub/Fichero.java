@@ -13,6 +13,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 /**
+ * Clase que contiene todos los métodos necesarios para operar con ficheros
+ * 
  * @author Elisa Navarro Zuara
  * @version 1.0
  */
@@ -24,7 +26,7 @@ public class Fichero {
 	 * @param file
 	 *            Representa el fichero a abrir
 	 * @return Videoclub existente
-	 * @throws ClassNotFoundException
+	 * @throws ClassNotFoundException 
 	 * @throws IOException
 	 */
 	public static Videoclub abrir(File file) throws ClassNotFoundException,

@@ -23,7 +23,14 @@ public class MostrarPorGenero extends VideoclubGUI {
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * Videoclub
+	 */
 	private Videoclub videoclub;
+	
+	/**
+	 * Índice del producto
+	 */
 	private int index = -1;
 
 	/**
@@ -65,6 +72,9 @@ public class MostrarPorGenero extends VideoclubGUI {
 		actualizar();
 	}
 	
+	/**
+	 * Actualiza el contenido del diálogo
+	 */
 	private void actualizar() {
 		if (videoclub.size() == 0) {
 			return;
@@ -74,16 +84,26 @@ public class MostrarPorGenero extends VideoclubGUI {
 		comprobarBotones();		
 	}
 	
+	/**
+	 * Muestra el siguiente producto del videoclub
+	 */
 	private void mostrarSiguiente() {
 		mostrarProducto(videoclub.get(++index));
 		comprobarBotones();
 	}
 	
+	/**
+	 * Muestra el producto anterior del videoclub
+	 */
 	private void mostrarAnterior() {
 		mostrarProducto(videoclub.get(--index));
 		comprobarBotones();
 	}
 	
+	/**
+	 * Comprueba si existe otro producto en el videoclub, tanto en el botón
+	 * siguiente como en el botón anterior
+	 */
 	private void comprobarBotones() {
 		if (videoclub.get(index + 1) == null)
 			enviar.setEnabled(false);
@@ -96,6 +116,12 @@ public class MostrarPorGenero extends VideoclubGUI {
 			anterior.setEnabled(true);
 	}
 	
+	/**
+	 * Muestra las características de un producto
+	 * 
+	 * @param producto
+	 *            Representa el producto a mostrar
+	 */
 	private void mostrarProducto(Producto producto) {
 		if (producto instanceof Pelicula) {
 			Pelicula pelicula = (Pelicula) producto;
@@ -106,7 +132,7 @@ public class MostrarPorGenero extends VideoclubGUI {
 			rdbtnPelicula.setSelected(true);
 			comboBoxGenero.addItem(pelicula.getGenero());
 			comboBoxGenero.setSelectedItem(pelicula.getGenero());
-			comprobarProducto();
+			isDisponible();
 		} else if (producto instanceof Serie) {
 			Serie serie = (Serie) producto;
 			textFieldID.setText(serie.getId());
@@ -117,7 +143,7 @@ public class MostrarPorGenero extends VideoclubGUI {
 			rdbtnSerie.setSelected(true);
 			comboBoxGenero.addItem(serie.getGenero());
 			comboBoxGenero.setSelectedItem(serie.getGenero());
-			comprobarProducto();
+			isDisponible();
 		} else {
 			Musica musica = (Musica) producto;
 			textFieldID.setText(musica.getId());
@@ -127,10 +153,17 @@ public class MostrarPorGenero extends VideoclubGUI {
 			rdbtnMusica.setSelected(true);
 			comboBoxGeneroMusical.addItem(musica.getGenero());
 			comboBoxGeneroMusical.setSelectedItem(musica.getGenero());
-			comprobarProducto();
+			isDisponible();
 		}
 	}
 
+	/**
+	 * Genera un videoclub con los productos de un determinado género
+	 * 
+	 * @param videoclub
+	 *            Representa la lista con los productos de un determinado género
+	 * @return Videoclub generado
+	 */
 	private Videoclub generarVideoclub(ArrayList<Producto> videoclub) {
 		Videoclub videoclubPorGenero = new Videoclub();
 		for (Producto producto: videoclub) {

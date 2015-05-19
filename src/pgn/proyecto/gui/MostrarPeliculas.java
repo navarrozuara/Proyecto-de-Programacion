@@ -19,7 +19,14 @@ public class MostrarPeliculas extends VideoclubGUI {
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * Videoclub
+	 */
 	private Videoclub videoclub;
+	
+	/**
+	 * Índice del producto
+	 */
 	private int index = -1;
 
 	/**
@@ -61,6 +68,11 @@ public class MostrarPeliculas extends VideoclubGUI {
 		actualizar();
 	}
 	
+	/**
+	 * Genera un videoclub con los productos de un determinado tipo
+	 * 
+	 * @return Videoclub generado
+	 */
 	private Videoclub generarVideoclub() {
 		Videoclub videoclubPeliculas = new Videoclub();
 		for (int i = 0; i < Gestion.getVideoclub().size(); i++) {
@@ -80,6 +92,9 @@ public class MostrarPeliculas extends VideoclubGUI {
 		return videoclubPeliculas;
 	}
 
+	/**
+	 * Actualiza el contenido del diálogo
+	 */
 	private void actualizar() {
 		if (videoclub.size() == 0) {
 			return;
@@ -89,16 +104,26 @@ public class MostrarPeliculas extends VideoclubGUI {
 		comprobarBotones();		
 	}
 	
+	/**
+	 * Muestra el siguiente producto del videoclub
+	 */
 	private void mostrarSiguiente() {
 		mostrarProducto(videoclub.get(++index));
 		comprobarBotones();
 	}
 	
+	/**
+	 * Muestra el producto anterior del videoclub
+	 */
 	private void mostrarAnterior() {
 		mostrarProducto(videoclub.get(--index));
 		comprobarBotones();
 	}
 	
+	/**
+	 * Comprueba si existe otro producto en el videoclub, tanto en el botón
+	 * siguiente como en el botón anterior
+	 */
 	private void comprobarBotones() {
 		if (videoclub.get(index + 1) == null)
 			enviar.setEnabled(false);
@@ -111,6 +136,12 @@ public class MostrarPeliculas extends VideoclubGUI {
 			anterior.setEnabled(true);
 	}
 	
+	/**
+	 * Muestra las características de un producto
+	 * 
+	 * @param producto
+	 *            Representa el producto a mostrar
+	 */
 	private void mostrarProducto(Producto producto) {
 		Pelicula pelicula = (Pelicula) producto;
 		textFieldID.setText(pelicula.getId());
@@ -120,9 +151,14 @@ public class MostrarPeliculas extends VideoclubGUI {
 		rdbtnPelicula.setSelected(true);
 		comboBoxGenero.addItem(pelicula.getGenero());
 		comboBoxGenero.setSelectedItem(pelicula.getGenero());
-		comprobarProducto();
+		isDisponible();
 	}
 	
+	/**
+	 * Devuelve el videoclub
+	 * 
+	 * @return Videoclub
+	 */
 	Videoclub getVideoclub() {
 		return videoclub;
 	}

@@ -49,7 +49,7 @@ public class MostrarPorTitulo extends VideoclubGUI {
 				try {
 					producto = Gestion.getVideoclub().getProducto(textFieldTitulo.getText());
 					mostrarProducto(producto);
-					comprobarProducto();
+					isDisponible();
 				} catch (ProductoNoExisteException e1) {
 					JOptionPane.showMessageDialog(contentPanel,
 							e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -58,6 +58,12 @@ public class MostrarPorTitulo extends VideoclubGUI {
 		});
 	}
 	
+	/**
+	 * Muestra las características de un producto
+	 * 
+	 * @param producto
+	 *            Representa el producto a mostrar
+	 */
 	private void mostrarProducto(Producto producto) {
 		if (producto instanceof Pelicula) {
 			Pelicula pelicula = (Pelicula) producto;
