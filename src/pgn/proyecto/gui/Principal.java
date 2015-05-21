@@ -30,6 +30,9 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Toolkit;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
 
 /**
  * Ventana principal del programa
@@ -149,6 +152,7 @@ public class Principal {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(Principal.class.getResource("/imagenes/icono.png")));
 		frame.setResizable(false);
 		frame.setTitle("Sin título");
 		frame.setBounds(100, 100, 455, 345);
@@ -374,33 +378,57 @@ public class Principal {
 		mntmAcercaDe.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
 		mnAyuda.add(mntmAcercaDe);
 		
-		JLabel lblPeliculas = new JLabel();
+		final JLabel lblPeliculas = new JLabel();
 		lblPeliculas.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				mostrarPeliculas();
+			}
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				lblPeliculas.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblPeliculas.setBorder(null);
 			}
 		});
 		lblPeliculas.setIcon(new ImageIcon(Principal.class.getResource("/imagenes/peliculas.png")));
 		lblPeliculas.setBounds(30, 60, 100, 75);
 		frame.getContentPane().add(lblPeliculas);
 		
-		JLabel lblSeries = new JLabel();
+		final JLabel lblSeries = new JLabel();
 		lblSeries.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				mostrarSeries();
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblSeries.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblSeries.setBorder(null);
 			}
 		});
 		lblSeries.setIcon(new ImageIcon(Principal.class.getResource("/imagenes/series.png")));
 		lblSeries.setBounds(175, 60, 100, 75);
 		frame.getContentPane().add(lblSeries);
 		
-		JLabel lblMusica = new JLabel();
+		final JLabel lblMusica = new JLabel();
 		lblMusica.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				mostrarMusica();
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblMusica.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblMusica.setBorder(null);
 			}
 		});
 		lblMusica.setIcon(new ImageIcon(Principal.class.getResource("/imagenes/musica.png")));
