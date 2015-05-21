@@ -33,7 +33,7 @@ public class Musica extends Producto {
 	 * Patrón para un intérprete válido
 	 */
 	private static final Pattern patternInterprete = Pattern
-			.compile("^[A-ZÁÉÍÓÚÑ]{2,}" + "(\\s+[A-ZÁÉÍÓÚÑ]{2,})*$");
+			.compile("(?i)^[a-záéíóúÁÉÍÓÚñÑ]{2,}" + "(\\s+[a-záéíóúÁÉÍÓÚñÑ]{2,})*$");
 	
 	/**
 	 * Intérprete de la música

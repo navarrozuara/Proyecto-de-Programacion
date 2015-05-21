@@ -33,7 +33,7 @@ public class Pelicula extends Producto {
 	 * Patrón para un director válido
 	 */
 	private static final Pattern patternDirector = Pattern
-			.compile("^[A-ZÁÉÍÓÚÑ]{2,}" + "(\\s+[A-ZÁÉÍÓÚÑ]{2,})*$");
+			.compile("(?i)^[a-záéíóúÁÉÍÓÚñÑ]{2,}" + "(\\s+[a-záéíóúÁÉÍÓÚñÑ]{2,})*$");
 	
 	/**
 	 * Director de la película
