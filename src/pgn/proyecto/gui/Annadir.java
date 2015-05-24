@@ -34,7 +34,7 @@ public class Annadir extends VideoclubGUI {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					if (getTipo() == TipoItem.PELICULA) {
-						Gestion.getVideoclub().annadir(textFieldID.getText(),
+						Gestion.getVideoclub().annadir(textFieldID.getText().toUpperCase(),
 								textFieldTitulo.getText(),
 								Integer.parseInt(textFieldAnnio.getText()),
 								textFieldAutor.getText(),
@@ -43,7 +43,7 @@ public class Annadir extends VideoclubGUI {
 						JOptionPane.showMessageDialog(contentPanel, "Película añadida con éxito.");
 					} else if (getTipo() == TipoItem.SERIE) {
 						Gestion.getVideoclub().annadir(
-								textFieldID.getText(),
+								textFieldID.getText().toUpperCase(),
 								textFieldTitulo.getText(),
 								Integer.parseInt(textFieldAnnio.getText()),
 								Integer.parseInt(textFieldNumTemporadas.getText()),
@@ -53,7 +53,7 @@ public class Annadir extends VideoclubGUI {
 						JOptionPane.showMessageDialog(contentPanel, "Serie añadida con éxito.");
 					} else if (getTipo() == TipoItem.MUSICA) {
 						Gestion.getVideoclub().annadir(
-								textFieldID.getText(),
+								textFieldID.getText().toUpperCase(),
 								textFieldTitulo.getText(),
 								Integer.parseInt(textFieldAnnio.getText()),
 								textFieldAutor.getText(),
@@ -65,13 +65,16 @@ public class Annadir extends VideoclubGUI {
 								"Debe seleccionar un producto.", "Error",
 								JOptionPane.ERROR_MESSAGE);
 					}
-				} catch (NumberFormatException | ProductoYaExisteException
-						| IdNoValidoException | TituloNoValidoException
-						| AnnioNoValidoException | AutorNoValidoException
-						| TemporadaNoValidaException | GeneroNoValidoException
-						| TipoNoValidoException e) {
+				} catch (ProductoYaExisteException | IdNoValidoException
+						| TituloNoValidoException | AnnioNoValidoException
+						| AutorNoValidoException | TemporadaNoValidaException
+						| GeneroNoValidoException | TipoNoValidoException e) {
 					JOptionPane.showMessageDialog(contentPanel,
 							e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+				} catch (NumberFormatException e) {
+					JOptionPane.showMessageDialog(contentPanel,
+							"El formato del año/temporada ha de ser numérico.",
+							"Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});

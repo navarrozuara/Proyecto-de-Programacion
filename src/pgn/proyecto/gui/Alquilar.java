@@ -11,9 +11,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.JButton;
 
 /**
  * @author Elisa Navarro Zuara
@@ -30,8 +32,10 @@ public class Alquilar extends VideoclubGUI {
 	 * Colección de alquileres
 	 */
 	private static ArrayList<Alquiler> listaAlquileres = new ArrayList<Alquiler>();
+	private Date fechaDevolucion;
 	private JTextField textFieldAlquiler;
 	private JTextField textFieldDevolucion;
+	private JButton recibo;
 
 	/**
 	 * Create the dialog.
@@ -41,11 +45,12 @@ public class Alquilar extends VideoclubGUI {
 		setTitle("Registrar alquiler");
 		setBounds(100, 100, 458, 258);
 		
-		anterior.setVisible(true);
 		panel1.setVisible(true);
 		
 		enviar.setText("Alquilar");
-		anterior.setText("Recibo");
+		
+		recibo = new JButton("Recibo");
+		buttonPane.add(recibo, 0);
 		
 		textFieldTitulo.setEditable(false);
 		textFieldAutor.setEditable(false);
@@ -87,19 +92,34 @@ public class Alquilar extends VideoclubGUI {
 		enviar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Producto producto;
-				Alquiler alquiler;
+				Alquiler alquilar;
 				if (textFieldDevolucion.getText() == "" || !esValidaFecha(textFieldDevolucion.getText())) {
 					JOptionPane.showMessageDialog(contentPanel,
 							"La fecha no es válida.", "Error",
 							JOptionPane.ERROR_MESSAGE);
 					return;
 				}
+				if (fechaDevolucion.before(new Date())) {
+					JOptionPane.showMessageDialog(contentPanel,
+							"La fecha ha de ser posterior a la actual.", "Error",
+							JOptionPane.ERROR_MESSAGE);
+					return;
+				}
 				try {
 					producto = Gestion.getVideoclub().get(textFieldID.getText());
-					alquiler = new Alquiler(producto);
+					alquilar = new Alquiler(producto);
+					producto.setFechaAlquiler(new Date());
+					producto.setFechaDevolucion(fechaDevolucion);
 					mostrarProducto(producto);
 					isDisponible();
-					textFieldAlquiler.setText(alquiler.getFechaAlquiler());
+					alquilar.setFechaDevolucion(fechaDevolucion);
+					textFieldAlquiler.setText(alquilar.getFechaAlquiler());
+					if (!producto.isDisponible()) {
+						JOptionPane.showMessageDialog(contentPanel,
+								"El producto no está disponible.", "Error",
+								JOptionPane.ERROR_MESSAGE);
+						return;
+					}
 					int n = JOptionPane.showOptionDialog(null,
 							"¿Está seguro de que desea alquilarlo?",
 							"Confirmar", JOptionPane.YES_NO_CANCEL_OPTION,
@@ -107,8 +127,8 @@ public class Alquilar extends VideoclubGUI {
 					switch (n) {
 					case JOptionPane.YES_OPTION:
 						try {
-							alquiler.alquilar();
-							listaAlquileres.add(alquiler);
+							alquilar.alquilar();
+							listaAlquileres.add(alquilar);
 							isDisponible();
 							Gestion.setModificado(true);
 							clear();
@@ -129,7 +149,7 @@ public class Alquilar extends VideoclubGUI {
 			}
 		});
 		
-		anterior.addActionListener(new ActionListener() {
+		recibo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (listaAlquileres.isEmpty()) {
 					JOptionPane.showMessageDialog(contentPanel,
@@ -139,7 +159,6 @@ public class Alquilar extends VideoclubGUI {
 				}
 				int dias = Integer.parseInt(textFieldDevolucion.getText().substring(0, 2))
 						- Integer.parseInt(textFieldAlquiler.getText().substring(0, 2));
-				Alquiler.setFechaDevolucion(dias);
 				Recibo recibo = new Recibo(Alquiler.generarRecibo(listaAlquileres, dias, getPrecio()));
 				recibo.setVisible(true);
 			}
@@ -163,7 +182,7 @@ public class Alquilar extends VideoclubGUI {
 		try {
 			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 			formato.setLenient(false);
-			formato.parse(fecha);
+			fechaDevolucion = formato.parse(fecha);
 		} catch (Exception e) {
 			return false;
 		}

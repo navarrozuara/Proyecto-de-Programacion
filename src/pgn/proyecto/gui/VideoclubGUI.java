@@ -42,6 +42,7 @@ public class VideoclubGUI extends JDialog implements ChangeListener {
 	private static final long serialVersionUID = 1L;
 	
 	protected final JPanel contentPanel = new JPanel();
+	protected JPanel buttonPane;
 	protected final ButtonGroup buttonGroup = new ButtonGroup();
 	protected final ButtonGroup buttonGroup1 = new ButtonGroup();
 	protected JTextField textFieldID;
@@ -69,7 +70,6 @@ public class VideoclubGUI extends JDialog implements ChangeListener {
 	protected JButton disponible;
 	protected JButton enviar;
 	protected JButton salir;
-	protected JButton anterior;
 
 	/**
 	 * Create the dialog.
@@ -117,9 +117,9 @@ public class VideoclubGUI extends JDialog implements ChangeListener {
 		textFieldTitulo.setBounds(190, 53, 160, 20);
 		textFieldTitulo.setColumns(50);
 		
-		lblAutor = new JLabel("Autor");
+		lblAutor = new JLabel("Director");
 		lblAutor.setBounds(122, 81, 58, 14);
-		
+
 		textFieldAutor = new JTextField();
 		textFieldAutor.setBounds(190, 78, 160, 20);
 		textFieldAutor.setColumns(50);
@@ -135,7 +135,7 @@ public class VideoclubGUI extends JDialog implements ChangeListener {
 		
 		lblNumTemporadas = new JLabel("N\u00BA Temporadas");
 		lblNumTemporadas.setVisible(false);
-		lblNumTemporadas.setBounds(225, 81, 87, 14);
+		lblNumTemporadas.setBounds(226, 81, 87, 14);
 		
 		textFieldNumTemporadas = new JTextField();
 		textFieldNumTemporadas.setVisible(false);
@@ -146,7 +146,7 @@ public class VideoclubGUI extends JDialog implements ChangeListener {
 		lblAnnio.setBounds(122, 106, 46, 14);
 		
 		textFieldAnnio = new JTextField();
-		textFieldAnnio.setBounds(190, 103, 46, 20);
+		textFieldAnnio.setBounds(190, 103, 68, 20);
 		textFieldAnnio.setColumns(4);
 		
 		lblGenero = new JLabel("G\u00E9nero");
@@ -154,6 +154,7 @@ public class VideoclubGUI extends JDialog implements ChangeListener {
 		
 		comboBoxGenero = new JComboBox<Genero>();
 		comboBoxGenero.setBounds(190, 128, 99, 20);
+		comboBoxGenero.setModel(new DefaultComboBoxModel<Genero>(Genero.values()));
 		
 		comboBoxGeneroMusical = new JComboBox<GeneroMusical>();
 		comboBoxGeneroMusical.setVisible(false);
@@ -202,19 +203,12 @@ public class VideoclubGUI extends JDialog implements ChangeListener {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		
 		{
-			JPanel buttonPane = new JPanel();
+			buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				anterior = new JButton("<");
-				anterior.setVisible(false);
-				anterior.setActionCommand("<");
-				buttonPane.add(anterior);
-				getRootPane().setDefaultButton(anterior);
-			}
-			{
-				enviar = new JButton(">");
-				enviar.setActionCommand(">");
+				enviar = new JButton("Enviar");
+				enviar.setActionCommand("Enviar");
 				buttonPane.add(enviar);
 				getRootPane().setDefaultButton(enviar);
 			}

@@ -3,7 +3,9 @@
  */
 package pgn.proyecto.gui;
 
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 import pgn.proyecto.videoclub.*;
 
@@ -20,6 +22,9 @@ public class Devolver extends VideoclubGUI {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	private JTextField textFieldAlquiler;
+	private JTextField textFieldDevolucion;
 
 	/**
 	 * Create the dialog.
@@ -27,6 +32,7 @@ public class Devolver extends VideoclubGUI {
 	public Devolver() {
 		super();
 		setTitle("Devolver alquiler");
+		setBounds(100, 100, 458, 258);
 		
 		enviar.setText("Devolver");
 		
@@ -43,15 +49,43 @@ public class Devolver extends VideoclubGUI {
 		rdbtnSerie.setEnabled(false);
 		rdbtnMusica.setEnabled(false);
 		
+		JLabel lblFechaAlquiler = new JLabel("Fecha alquiler");
+		lblFechaAlquiler.setBounds(29, 160, 83, 14);
+		contentPanel.add(lblFechaAlquiler);
+		
+		textFieldAlquiler = new JTextField();
+		textFieldAlquiler.setEditable(false);
+		textFieldAlquiler.setBounds(114, 157, 86, 20);
+		contentPanel.add(textFieldAlquiler);
+		textFieldAlquiler.setColumns(10);
+		
+		JLabel lblFechaDevolucion = new JLabel("Fecha devoluci\u00F3n");
+		lblFechaDevolucion.setBounds(219, 160, 99, 14);
+		contentPanel.add(lblFechaDevolucion);
+		
+		textFieldDevolucion = new JTextField();
+		textFieldDevolucion.setEditable(false);
+		textFieldDevolucion.setBounds(328, 157, 86, 20);
+		contentPanel.add(textFieldDevolucion);
+		textFieldDevolucion.setColumns(10);
+		
 		enviar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Producto producto;
-				Alquiler alquiler;
+				Alquiler alquilar;
 				try {
 					producto = Gestion.getVideoclub().get(textFieldID.getText());
-					alquiler = new Alquiler(producto);
+					alquilar = new Alquiler(producto);
 					mostrarProducto(producto);
 					isDisponible();
+					if (producto.isDisponible()) {
+						JOptionPane.showMessageDialog(contentPanel,
+								"El producto ya está disponible.", "Error",
+								JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+					textFieldAlquiler.setText(producto.getFechaAlquiler());
+					textFieldDevolucion.setText(producto.getFechaDevolucion());
 					int n = JOptionPane.showOptionDialog(null,
 							"¿Está seguro de que desea devolverlo?",
 							"Confirmar", JOptionPane.YES_NO_CANCEL_OPTION,
@@ -59,7 +93,7 @@ public class Devolver extends VideoclubGUI {
 					switch (n) {
 					case JOptionPane.YES_OPTION:
 						try {
-							alquiler.devolver();
+							alquilar.devolver();
 							isDisponible();
 							Gestion.setModificado(true);
 							clear();
@@ -91,6 +125,8 @@ public class Devolver extends VideoclubGUI {
 		textFieldTemporada.setText("");
 		textFieldNumTemporadas.setText("");
 		textFieldAnnio.setText("");
+		textFieldAlquiler.setText("");
+		textFieldDevolucion.setText("");
 		buttonGroup.clearSelection();
 		comboBoxGenero.setSelectedItem(null);
 		comboBoxGeneroMusical.setSelectedItem(null);

@@ -6,6 +6,10 @@ package pgn.proyecto.gui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+
 import pgn.proyecto.videoclub.*;
 
 /**
@@ -29,6 +33,9 @@ public class Ordenar extends VideoclubGUI {
 	 */
 	private int index = -1;
 
+	private JButton btnAnterior;
+	private JButton btnSiguiente;
+	
 	/**
 	 * Create the dialog.
 	 */
@@ -37,9 +44,12 @@ public class Ordenar extends VideoclubGUI {
 		setTitle("Ordenar productos");
 		
 		this.videoclub = Gestion.getVideoclub();
+		
 		videoclub.ordenar();
 		
-		anterior.setVisible(true);
+		JOptionPane.showMessageDialog(contentPanel, "Videoclub ordenado con éxito.");
+		
+		buttonPane.setVisible(false);
 		
 		textFieldID.setEditable(false);
 		textFieldTitulo.setEditable(false);
@@ -55,13 +65,23 @@ public class Ordenar extends VideoclubGUI {
 		rdbtnSerie.setEnabled(false);
 		rdbtnMusica.setEnabled(false);
 		
-		anterior.addActionListener(new ActionListener() {
+		btnAnterior = new JButton();
+		btnAnterior.setIcon(new ImageIcon(Mostrar.class.getResource("/imagenes/anterior.png")));
+		btnAnterior.setBounds(29, 160, 68, 54);
+		contentPanel.add(btnAnterior);
+		
+		btnSiguiente = new JButton();
+		btnSiguiente.setIcon(new ImageIcon(Mostrar.class.getResource("/imagenes/siguiente.png")));
+		btnSiguiente.setBounds(286, 160, 68, 54);
+		contentPanel.add(btnSiguiente);
+		
+		btnAnterior.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mostrarAnterior();
 			}
 		});
 		
-		enviar.addActionListener(new ActionListener() {
+		btnSiguiente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mostrarSiguiente();
 			}
@@ -103,14 +123,14 @@ public class Ordenar extends VideoclubGUI {
 	 */
 	private void comprobarBotones() {
 		if (videoclub.get(index + 1) == null)
-			enviar.setEnabled(false);
+			btnSiguiente.setEnabled(false);
 		else
-			enviar.setEnabled(true);
+			btnSiguiente.setEnabled(true);
 
 		if (videoclub.get(index - 1) == null)
-			anterior.setEnabled(false);
+			btnAnterior.setEnabled(false);
 		else
-			anterior.setEnabled(true);
+			btnAnterior.setEnabled(true);
 	}
 	
 	/**

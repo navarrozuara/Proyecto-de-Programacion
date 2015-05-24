@@ -4,7 +4,9 @@
 package pgn.proyecto.videoclub;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.regex.Pattern;
 
 /**
@@ -68,6 +70,21 @@ public abstract class Producto implements Serializable, Comparable<Producto>, Ca
 	 * Estado del producto
 	 */
 	private boolean disponible;
+	
+	/**
+	 * Formato de fecha (dd/MM/yyyy)
+	 */
+	private static SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+	
+	/**
+	 * Fecha de alquiler del producto
+	 */
+	private Date fechaAlquiler;
+	
+	/**
+	 * Fecha de devolución del producto
+	 */
+	private Date fechaDevolucion;
 
 	/**
 	 * Construye un nuevo producto de identificador, título y año especificado
@@ -213,6 +230,44 @@ public abstract class Producto implements Serializable, Comparable<Producto>, Ca
 	 */
 	void setDisponible(boolean disponible) {
 		this.disponible = disponible;
+	}
+	
+	/**
+	 * Devuelve la fecha de alquiler del producto
+	 * 
+	 * @return Fecha de alquiler del producto
+	 */
+	public String getFechaAlquiler() {
+		return formato.format(fechaAlquiler);
+	}
+
+	/**
+	 * Modifica la fecha de alquiler del producto
+	 * 
+	 * @param fechaAlquiler
+	 *            Representa la nueva fecha de alquiler del producto
+	 */
+	public void setFechaAlquiler(Date fechaAlquiler) {
+		this.fechaAlquiler = fechaAlquiler;
+	}
+
+	/**
+	 * Devuelve la fecha de devolución del producto
+	 * 
+	 * @return Fecha de devolución del producto
+	 */
+	public String getFechaDevolucion() {
+		return formato.format(fechaDevolucion);
+	}
+
+	/**
+	 * Modifica la fecha de devolución del producto
+	 * 
+	 * @param fechaDevolucion
+	 *            Representa la nueva fecha de devolución del producto
+	 */
+	public void setFechaDevolucion(Date fechaDevolucion) {
+		this.fechaDevolucion = fechaDevolucion;
 	}
 	
 	/**

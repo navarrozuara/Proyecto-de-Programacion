@@ -35,8 +35,6 @@ import javax.swing.border.LineBorder;
 import java.awt.Color;
 
 /**
- * Ventana principal del programa
- * 
  * @author Elisa Navarro Zuara
  * @version 1.0
  */
@@ -49,79 +47,21 @@ public class Principal {
 	private JMenu mnAlquiler;
 	private JMenu mnAyuda;
 	
-	/**
-	 * JFileChooser
-	 */
 	private JFileChooser fileChooser = new JFileChooser();
-	
-	/**
-	 * Filtro aplicado al JFileChooser
-	 */
 	private FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.obj", "obj");
 	
-	/**
-	 * Ventana para añadir productos
-	 */
 	private Annadir annadir;
-	
-	/**
-	 * Ventana para eliminar productos
-	 */
 	private Eliminar eliminar;
-	
-	/**
-	 * Ventana para mostrar los productos
-	 */
 	private Mostrar mostrar;
-	
-	/**
-	 * Ventana para mostrar los productos por género
-	 */
 	private ElegirGenero elegirGenero;
-	
-	/**
-	 * Ventana para mostrar los productos por título
-	 */
 	private MostrarPorTitulo mostrarPorTitulo;
-	
-	/**
-	 * Ventana para ordenar los productos
-	 */
 	private Ordenar ordenar;
-	
-	/**
-	 * Ventana para alquilar productos
-	 */
 	private Alquilar alquilar;
-	
-	/**
-	 * Ventana para devolver productos
-	 */
 	private Devolver devolver;
-	
-	/**
-	 * Ventana de ayuda
-	 */
 	private Ayuda ayuda;
-	
-	/**
-	 * Ventana acerca de
-	 */
 	private AcercaDe acercaDe;
-	
-	/**
-	 * Ventana para mostrar las películas
-	 */
 	private MostrarPeliculas mostrarPeliculas;
-	
-	/**
-	 * Ventana para mostrar las series
-	 */
 	private MostrarSeries mostrarSeries;
-	
-	/**
-	 * Ventana para mostrar la música
-	 */
 	private MostrarMusica mostrarMusica;
 
 	/**
@@ -359,7 +299,7 @@ public class Principal {
 		JMenuItem mntmVerAyuda = new JMenuItem("Ver ayuda");
 		mntmVerAyuda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				ayuda = new Ayuda();
+				ayuda = Ayuda.getInstance();
 				ayuda.setVisible(true);
 			}
 		});

@@ -17,11 +17,9 @@ import javax.swing.border.EmptyBorder;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.io.BufferedOutputStream;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.awt.Color;
 
 /**
@@ -69,12 +67,12 @@ public class Recibo extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton guardar = new JButton("Guardar");
+				final JButton guardar = new JButton("Guardar");
 				guardar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						try {
-							File file = new File("recibo.txt");
-							guardar(file);
+							guardar();
+							guardar.setEnabled(false);
 							JOptionPane.showMessageDialog(contentPanel, "Recibo guardado con éxito.");
 						} catch (IOException e) {
 							JOptionPane.showMessageDialog(contentPanel,
@@ -103,14 +101,11 @@ public class Recibo extends JDialog {
 	/**
 	 * Método para guardar un recibo
 	 * 
-	 * @param file
-	 *            Representa el fichero a guardar
 	 * @throws IOException
 	 */
-	private void guardar(File file) throws IOException {
-		try (DataOutputStream out = new DataOutputStream(
-				new BufferedOutputStream(new FileOutputStream(file, true)))) {
-			out.writeUTF(mensaje);
+	private void guardar() throws IOException {
+		try (PrintWriter print = new PrintWriter(new FileWriter("recibo.txt", true))) {
+			print.println(mensaje);
 		}
 	}
 	

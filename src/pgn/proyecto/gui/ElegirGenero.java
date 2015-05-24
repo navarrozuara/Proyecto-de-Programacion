@@ -70,13 +70,13 @@ public class ElegirGenero extends JDialog implements ChangeListener {
 		panel.add(rdbtnPelicula);
 		buttonGroup.add(rdbtnPelicula);
 		
-		rdbtnSerie = new JRadioButton("Serie");
+		rdbtnSerie = new JRadioButton("Serie", false);
 		rdbtnSerie.addChangeListener(this);
 		rdbtnSerie.setBounds(8, 42, 71, 23);
 		panel.add(rdbtnSerie);
 		buttonGroup.add(rdbtnSerie);
 		
-		rdbtnMusica = new JRadioButton("M\u00FAsica");
+		rdbtnMusica = new JRadioButton("M\u00FAsica", false);
 		rdbtnMusica.addChangeListener(this);
 		rdbtnMusica.setBounds(8, 68, 71, 23);
 		panel.add(rdbtnMusica);
@@ -87,6 +87,7 @@ public class ElegirGenero extends JDialog implements ChangeListener {
 		
 		comboBoxGenero = new JComboBox<Genero>();
 		comboBoxGenero.setBounds(173, 52, 99, 20);
+		comboBoxGenero.setModel(new DefaultComboBoxModel<Genero>(Genero.values()));
 		
 		comboBoxGeneroMusical = new JComboBox<GeneroMusical>();
 		comboBoxGeneroMusical.setVisible(false);

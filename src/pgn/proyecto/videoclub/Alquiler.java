@@ -3,7 +3,6 @@
  */
 package pgn.proyecto.videoclub;
 
-import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -16,12 +15,7 @@ import java.util.Date;
  * @author Elisa Navarro Zuara
  * @version 1.0
  */
-public class Alquiler implements Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class Alquiler {
 	
 	/**
 	 * Fecha actual
@@ -46,7 +40,7 @@ public class Alquiler implements Serializable {
 	/**
 	 * Fecha de devolución
 	 */
-	private static Date fechaDevolucion;
+	private Date fechaDevolucion;
 
 	/**
 	 * Construye un nuevo alquiler de producto especificado
@@ -82,13 +76,11 @@ public class Alquiler implements Serializable {
 	/**
 	 * Modifica la fecha de devolución
 	 * 
-	 * @param dias
-	 *            Representa el número de dias a alquilar
+	 * @param fechaDevolucion
+	 *            Representa la nueva fecha de devolución
 	 */
-	public static void setFechaDevolucion(int dias) {
-		fecha.add(Calendar.DAY_OF_MONTH, dias);
-		fechaDevolucion = fecha.getTime();
-		fecha.setTime(new Date());
+	public void setFechaDevolucion(Date fechaDevolucion) {
+		this.fechaDevolucion = fechaDevolucion;
 	}
 
 	/**
@@ -114,7 +106,7 @@ public class Alquiler implements Serializable {
 	 * 
 	 * @return Fecha de devolución
 	 */
-	public static String getFechaDevolucion() {
+	private String getFechaDevolucion() {
 		return formato.format(fechaDevolucion);
 	}
 	
@@ -157,14 +149,13 @@ public class Alquiler implements Serializable {
 			int dias, TipoAlquiler tipo) {
 		String recibo;
 		float total = 0f;
-		Alquiler.setFechaDevolucion(dias);
 		recibo = "\r\n\r\nRecibo de alquiler:";
 		for (Alquiler alquiler: listaAlquileres) {
 			recibo += "\r\n\r\nID: " + alquiler.getProducto().getId() + "\r\nTitulo: "
 					+ alquiler.getProducto().getTitulo() + " ("
 					+ alquiler.getProducto().getPrecio(dias, tipo) + " euros)\r\n";
 			recibo += "Fecha alquiler: " + alquiler.getFechaAlquiler();
-			recibo += "\r\nFecha devolución: " + Alquiler.getFechaDevolucion();
+			recibo += "\r\nFecha devolución: " + alquiler.getFechaDevolucion();
 			total += alquiler.getProducto().getPrecio(dias, tipo);
 		}
 		recibo += "\r\n\r\nIMPORTE TOTAL = " + total + " euros\r\n";

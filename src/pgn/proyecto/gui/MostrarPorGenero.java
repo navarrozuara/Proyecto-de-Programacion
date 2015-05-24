@@ -5,6 +5,8 @@ package pgn.proyecto.gui;
 
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import pgn.proyecto.videoclub.*;
@@ -32,6 +34,9 @@ public class MostrarPorGenero extends VideoclubGUI {
 	 * Índice del producto
 	 */
 	private int index = -1;
+	
+	private JButton btnAnterior;
+	private JButton btnSiguiente;
 
 	/**
 	 * Create the dialog.
@@ -42,7 +47,7 @@ public class MostrarPorGenero extends VideoclubGUI {
 		
 		this.videoclub = generarVideoclub(videoclub);
 		
-		anterior.setVisible(true);
+		buttonPane.setVisible(false);
 		
 		textFieldID.setEditable(false);
 		textFieldTitulo.setEditable(false);
@@ -58,13 +63,23 @@ public class MostrarPorGenero extends VideoclubGUI {
 		rdbtnSerie.setEnabled(false);
 		rdbtnMusica.setEnabled(false);
 		
-		anterior.addActionListener(new ActionListener() {
+		btnAnterior = new JButton();
+		btnAnterior.setIcon(new ImageIcon(Mostrar.class.getResource("/imagenes/anterior.png")));
+		btnAnterior.setBounds(29, 160, 68, 54);
+		contentPanel.add(btnAnterior);
+		
+		btnSiguiente = new JButton();
+		btnSiguiente.setIcon(new ImageIcon(Mostrar.class.getResource("/imagenes/siguiente.png")));
+		btnSiguiente.setBounds(286, 160, 68, 54);
+		contentPanel.add(btnSiguiente);
+		
+		btnAnterior.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				mostrarAnterior();
 			}
 		});
 		
-		enviar.addActionListener(new ActionListener() {
+		btnSiguiente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mostrarSiguiente();
 			}
@@ -106,14 +121,14 @@ public class MostrarPorGenero extends VideoclubGUI {
 	 */
 	private void comprobarBotones() {
 		if (videoclub.get(index + 1) == null)
-			enviar.setEnabled(false);
+			btnSiguiente.setEnabled(false);
 		else
-			enviar.setEnabled(true);
+			btnSiguiente.setEnabled(true);
 
 		if (videoclub.get(index - 1) == null)
-			anterior.setEnabled(false);
+			btnAnterior.setEnabled(false);
 		else
-			anterior.setEnabled(true);
+			btnAnterior.setEnabled(true);
 	}
 	
 	/**

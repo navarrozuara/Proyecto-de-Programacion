@@ -18,6 +18,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JTextPane;
 import java.awt.Color;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 /**
  * @author Elisa Navarro Zuara
@@ -31,14 +33,23 @@ public class Ayuda extends JDialog {
 	private static final long serialVersionUID = 1L;
 	
 	private final JPanel contentPanel = new JPanel();
+	private static Ayuda ayuda = null;
 
 	/**
 	 * Create the dialog.
 	 */
-	public Ayuda() {
+	private Ayuda() {
 		setTitle("Ver ayuda");
 		setResizable(false);
 		setBounds(100, 100, 592, 427);
+		
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent arg0) {
+				ayuda = null;
+				dispose();
+			}
+		});
 		
 		final JTextPane textPane = new JTextPane();
 		textPane.setBackground(new Color(220, 220, 220));
@@ -148,6 +159,16 @@ public class Ayuda extends JDialog {
 		lblRegistrar.setBounds(10, 281, 180, 35);
 		lblRegistrar.setText("<html><body><ul><li>Registrar alquiler</ul></body></html>");
 		
+		JLabel lblRecibo = new JLabel();
+		lblRecibo.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				textPane.setText("<html><body><h2>Recibo de alquiler:</h2><p>Una vez alquilado uno o varios productos se podrá generar un recibo de alquiler a través del botón \"Recibo\", el cual podrá ser guardado en un archivo .txt haciendo clic en \"Guardar\".</body></html>");
+			}
+		});
+		lblRecibo.setBounds(10, 301, 180, 35);
+		lblRecibo.setText("<html><body><ul><li>Recibo</ul></body></html>");
+		
 		JLabel lblDevolver = new JLabel();
 		lblDevolver.addMouseListener(new MouseAdapter() {
 			@Override
@@ -155,7 +176,7 @@ public class Ayuda extends JDialog {
 				textPane.setText("<html><body><h2>Devolver alquiler:</h2><p>Los productos se devolveran introduciendo el identificador de dicho producto y haciendo clic en \"Devolver\".</body></html>");
 			}
 		});
-		lblDevolver.setBounds(10, 301, 180, 35);
+		lblDevolver.setBounds(10, 321, 180, 35);
 		lblDevolver.setText("<html><body><ul><li>Devolver alquiler</ul></body></html>");	
 		
 		contentPanel.setLayout(null);
@@ -172,6 +193,7 @@ public class Ayuda extends JDialog {
 		contentPanel.add(lblOrdenar);
 		contentPanel.add(lblAlquiler);
 		contentPanel.add(lblRegistrar);
+		contentPanel.add(lblRecibo);
 		contentPanel.add(lblDevolver);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -185,6 +207,7 @@ public class Ayuda extends JDialog {
 				JButton aceptar = new JButton("Aceptar");
 				aceptar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						ayuda = null;
 						dispose();
 					}
 				});
@@ -193,6 +216,18 @@ public class Ayuda extends JDialog {
 				getRootPane().setDefaultButton(aceptar);
 			}
 		}
+	}
+	
+	/**
+	 * Instancia la clase Ayuda
+	 * 
+	 * @return Instancia de la clase Ayuda
+	 */
+	public static synchronized Ayuda getInstance() {
+		if (ayuda == null) {
+			ayuda = new Ayuda();
+		}
+		return ayuda;
 	}
 	
 }

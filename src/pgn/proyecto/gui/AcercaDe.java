@@ -15,7 +15,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
-import java.awt.Color;
 
 /**
  * @author Elisa Navarro Zuara
@@ -58,13 +57,11 @@ public class AcercaDe extends JDialog {
 		contentPanel.add(lblVersion);
 		contentPanel.add(lblCopyright);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBackground(new Color(220, 220, 220));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		
 		{
 			JPanel buttonPane = new JPanel();
-			buttonPane.setBackground(new Color(220, 220, 220));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
