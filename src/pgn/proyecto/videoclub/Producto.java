@@ -10,19 +10,19 @@ import java.util.Date;
 import java.util.regex.Pattern;
 
 /**
- * Un producto tendr· las siguientes caracterÌsticas:
+ * Un producto tendr√° las siguientes caracter√≠sticas:
  * <ul>
- * <li>Identificador (˙nico por producto). El identificador constar· de cuatro
- * dÌgitos y un grupo de tres caracteres.
+ * <li>Identificador (√∫nico por producto). El identificador constar√° de cuatro
+ * d√≠gitos y un grupo de tres caracteres.
  * <ul>
- * <li>PEL, si el producto es una pelÌcula.</li>
+ * <li>PEL, si el producto es una pel√≠cula.</li>
  * <li>SER, si el producto es una serie.</li>
- * <li>MUS, si el producto es una m˙sica.</li>
+ * <li>MUS, si el producto es una m√∫sica.</li>
  * </ul>
  * </li>
- * <li>TÌtulo. El tÌtulo debe estar en may˙scula y debe de tener, al menos, tres
+ * <li>T√≠tulo. El t√≠tulo debe estar en may√∫scula y debe de tener, al menos, tres
  * caracteres.</li>
- * <li>AÒo. Un aÒo v·lido comprendido entre 1900 y el aÒo actual.</li>
+ * <li>A√±o. Un a√±o v√°lido comprendido entre 1900 y el a√±o actual.</li>
  * </ul>
  * 
  * @author Elisa Navarro Zuara
@@ -36,10 +36,10 @@ public abstract class Producto implements Serializable, Comparable<Producto>, Ca
 	private static final long serialVersionUID = 1L;
 	
 	/**
-	 * PatrÛn para un tÌtulo v·lido
+	 * Patr√≥n para un t√≠tulo v√°lido
 	 */
 	private static final Pattern patternTitulo = Pattern
-			.compile("(?i)^[a-z·ÈÌÛ˙¡…Õ”⁄Ò—0-9]{1,}" + "(\\s+[a-z·ÈÌÛ˙¡…Õ”⁄Ò—]{2,})*$");
+			.compile("(?i)^[a-z√°√©√≠√≥√∫√Å√â√ç√ì√ö√±√ë0-9]{1,}" + "(\\s+[a-z√°√©√≠√≥√∫√Å√â√ç√ì√ö√±√ë]{2,})*$");
 	
 	/**
 	 * Fecha actual
@@ -52,12 +52,12 @@ public abstract class Producto implements Serializable, Comparable<Producto>, Ca
 	private String id;
 	
 	/**
-	 * TÌtulo del producto
+	 * T√≠tulo del producto
 	 */
 	private String titulo;
 	
 	/**
-	 * AÒo de estreno del producto
+	 * A√±o de estreno del producto
 	 */
 	private int annio;
 	
@@ -82,26 +82,26 @@ public abstract class Producto implements Serializable, Comparable<Producto>, Ca
 	private Date fechaAlquiler;
 	
 	/**
-	 * Fecha de devoluciÛn del producto
+	 * Fecha de devoluci√≥n del producto
 	 */
 	private Date fechaDevolucion;
 
 	/**
-	 * Construye un nuevo producto de identificador, tÌtulo y aÒo especificado
+	 * Construye un nuevo producto de identificador, t√≠tulo y a√±o especificado
 	 * 
 	 * @param id
 	 *            Representa el identificador del nuevo producto
 	 * @param titulo
-	 *            Representa el tÌtulo del nuevo producto
+	 *            Representa el t√≠tulo del nuevo producto
 	 * @param annio
-	 *            Representa el aÒo de estreno del nuevo producto
+	 *            Representa el a√±o de estreno del nuevo producto
 	 * 
 	 * @throws IdNoValidoException
-	 *             Si el identificador no es v·lido
+	 *             Si el identificador no es v√°lido
 	 * @throws TituloNoValidoException
-	 *             Si el tÌtulo no es v·lido
+	 *             Si el t√≠tulo no es v√°lido
 	 * @throws AnnioNoValidoException
-	 *             Si el aÒo de estreno no es v·lido
+	 *             Si el a√±o de estreno no es v√°lido
 	 */
 	Producto(String id, String titulo, int annio) throws IdNoValidoException,
 			TituloNoValidoException, AnnioNoValidoException {
@@ -113,11 +113,11 @@ public abstract class Producto implements Serializable, Comparable<Producto>, Ca
 	}
 	
 	/**
-	 * Comprueba si el tÌtulo del producto es v·lido o no
+	 * Comprueba si el t√≠tulo del producto es v√°lido o no
 	 * 
 	 * @param titulo
-	 *            Representa el tÌtulo a validar
-	 * @return true si el tÌtulo es v·lido, false si el tÌtulo no es v·lido
+	 *            Representa el t√≠tulo a validar
+	 * @return true si el t√≠tulo es v√°lido, false si el t√≠tulo no es v√°lido
 	 */
 	private boolean esValidoTitulo(String titulo) {
 		return patternTitulo.matcher(titulo).matches();
@@ -129,37 +129,37 @@ public abstract class Producto implements Serializable, Comparable<Producto>, Ca
 	 * @param id
 	 *            Representa el nuevo identificador del producto
 	 * @throws IdNoValidoException
-	 *             Si el identificador no es v·lido
+	 *             Si el identificador no es v√°lido
 	 */
 	protected void setId(String id) throws IdNoValidoException {
 		this.id = id;
 	}
 
 	/**
-	 * Modifica el tÌtulo del producto
+	 * Modifica el t√≠tulo del producto
 	 * 
 	 * @param titulo
-	 *            Representa el nuevo tÌtulo del producto
+	 *            Representa el nuevo t√≠tulo del producto
 	 * @throws TituloNoValidoException
-	 *             Si el tÌtulo no es v·lido
+	 *             Si el t√≠tulo no es v√°lido
 	 */
 	private void setTitulo(String titulo) throws TituloNoValidoException {
 		if (!esValidoTitulo(titulo))
-			throw new TituloNoValidoException("El tÌtulo no es v·lido.");
+			throw new TituloNoValidoException("El t√≠tulo no es v√°lido.");
 		this.titulo = titulo;
 	}
 	
 	/**
-	 * Modifica el aÒo de estreno del producto
+	 * Modifica el a√±o de estreno del producto
 	 * 
 	 * @param annio
-	 *            Representa el nuevo aÒo de estreno del producto
+	 *            Representa el nuevo a√±o de estreno del producto
 	 * @throws AnnioNoValidoException
-	 *             Si el aÒo de estreno no es v·lido
+	 *             Si el a√±o de estreno no es v√°lido
 	 */
 	private void setAnnio(int annio) throws AnnioNoValidoException {
 		if (annio < 1900 || annio > fecha.get(Calendar.YEAR))
-			throw new AnnioNoValidoException("El aÒo no es v·lido.");
+			throw new AnnioNoValidoException("El a√±o no es v√°lido.");
 		this.annio = annio;
 	}
 	
@@ -169,11 +169,11 @@ public abstract class Producto implements Serializable, Comparable<Producto>, Ca
 	 * @param tipo
 	 *            Representa el nuevo tipo de producto
 	 * @throws TipoNoValidoException
-	 *             Si el tipo de producto no es v·lido
+	 *             Si el tipo de producto no es v√°lido
 	 */
 	protected void setTipo(TipoItem tipo) throws TipoNoValidoException {
 		if (tipo == null)
-			throw new TipoNoValidoException("El tipo no es v·lido.");
+			throw new TipoNoValidoException("El tipo no es v√°lido.");
 		this.tipo = tipo;
 	}
 
@@ -187,18 +187,18 @@ public abstract class Producto implements Serializable, Comparable<Producto>, Ca
 	}
 
 	/**
-	 * Devuelve el tÌtulo del producto
+	 * Devuelve el t√≠tulo del producto
 	 * 
-	 * @return TÌtulo del producto
+	 * @return T√≠tulo del producto
 	 */
 	public String getTitulo() {
 		return titulo;
 	}
 	
 	/**
-	 * Devuelve el aÒo de estreno del producto
+	 * Devuelve el a√±o de estreno del producto
 	 * 
-	 * @return AÒo de estreno del producto
+	 * @return A√±o de estreno del producto
 	 */
 	public int getAnnio() {
 		return annio;
@@ -252,19 +252,19 @@ public abstract class Producto implements Serializable, Comparable<Producto>, Ca
 	}
 
 	/**
-	 * Devuelve la fecha de devoluciÛn del producto
+	 * Devuelve la fecha de devoluci√≥n del producto
 	 * 
-	 * @return Fecha de devoluciÛn del producto
+	 * @return Fecha de devoluci√≥n del producto
 	 */
 	public String getFechaDevolucion() {
 		return formato.format(fechaDevolucion);
 	}
 
 	/**
-	 * Modifica la fecha de devoluciÛn del producto
+	 * Modifica la fecha de devoluci√≥n del producto
 	 * 
 	 * @param fechaDevolucion
-	 *            Representa la nueva fecha de devoluciÛn del producto
+	 *            Representa la nueva fecha de devoluci√≥n del producto
 	 */
 	public void setFechaDevolucion(Date fechaDevolucion) {
 		this.fechaDevolucion = fechaDevolucion;
@@ -274,7 +274,7 @@ public abstract class Producto implements Serializable, Comparable<Producto>, Ca
 	 * Calcula el precio del producto
 	 * 
 	 * @param dias
-	 *            Representa el n˙mero de dias a alquilar
+	 *            Representa el n√∫mero de dias a alquilar
 	 * @param tipo
 	 *            Representa el tipo de alquiler
 	 * @return Precio del producto
@@ -320,7 +320,7 @@ public abstract class Producto implements Serializable, Comparable<Producto>, Ca
 		if (id == null) {
 			if (other.id != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!id.equals(other.id) && !titulo.equals(other.titulo))
 			return false;
 		return true;
 	}
