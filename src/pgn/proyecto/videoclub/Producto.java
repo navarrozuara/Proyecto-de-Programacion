@@ -39,7 +39,7 @@ public abstract class Producto implements Serializable, Comparable<Producto>, Ca
 	 * Patrón para un título válido
 	 */
 	private static final Pattern patternTitulo = Pattern
-			.compile("(?i)^[a-záéíóúÁÉÍÓÚñÑ0-9]{1,}" + "(\\s+[a-záéíóúÁÉÍÓÚñÑ]{2,})*$");
+			.compile("(?i)^[a-záéíóúÁÉÍÓÚñÑ0-9]{1,}" + "(\\s+[a-záéíóúÁÉÍÓÚñÑ0-9]{1,})*$");
 	
 	/**
 	 * Fecha actual
